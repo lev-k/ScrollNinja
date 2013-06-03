@@ -54,7 +54,7 @@
                     "spriteFilePath": "data/jsons/render/stage/stage_test_near_tree_1_sprite.json",
                     "position": {
                         "x": 0,
-                        "y": -100
+                        "y": -200
                     }
                 }
             ]
@@ -84,7 +84,7 @@
             ]
         },
         {
-            "scale": 3,
+            "scale": 1,
             "backgrounds": [
                 {
                     "spriteFilePath": "data/jsons/render/stage/stage_test_near_mist_sprite.json",

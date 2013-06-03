@@ -20,6 +20,7 @@ import org.genshin.scrollninja.render.RenderObject;
 import org.genshin.scrollninja.utils.JsonUtils;
 import org.genshin.scrollninja.utils.debug.DebugTool;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -67,13 +68,19 @@ public abstract class AbstractNinja extends AbstractCharacter
 		setAnimation("Stay");
 		
 		//---- 残像エフェクトの定義
+		final Color color = new Color(0.0f, 0.0f, 60/255.0f, 1.0f);
 		if(afterimageEffectDef == null)
 		{
 			afterimageEffectDef = JsonUtils.read("data/jsons/effect/ninja_afterimage.json", EffectDef.class);
 			afterimageEffectDef.startVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
 			afterimageEffectDef.endVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
-			afterimageEffectDef.startColor.set(0.0f, 0.0f, 0.0f, 1.0f);
-			afterimageEffectDef.endColor.set(0.0f, 0.0f, 0.0f, 0.0f);
+			afterimageEffectDef.startColor.set(color.r, color.g, color.b, 1.0f);
+			afterimageEffectDef.endColor.set(color.r, color.g, color.b, 0.0f);
+		}
+		
+		for(RenderObject ro : getRenderObjects())
+		{
+			ro.setColor(color);
 		}
 	}
 	

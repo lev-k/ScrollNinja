@@ -22,11 +22,5 @@ public class Ninja extends AbstractNinja
 		
 		//---- コントローラを設定する。
 		setController(new DefaultNinjaController(this, cursor));
-		
-		//---- night mode
-		for(RenderObject ro : getRenderObjects())
-		{
-			ro.setColor(Color.BLACK);
-		}
 	}
 }
