@@ -1,18 +1,18 @@
 {
-    "textureFilePath": "data/textures/stage/test_main.png",
+    "textureFilePath": "data/textures/stage/stage.png",
     "uv": {
         "x": 0,
-        "y": 1596,
-        "width": 3840,
-        "height": 2500
+        "y": 648,
+        "width": 6200,
+        "height": 1400
     },
     "position": {
         "x": 0,
         "y": 0
     },
     "size": {
-        "x": 3840,
-        "y": 2500
+        "x": 6200,
+        "y": 1400
     },
     "origin": {
         "x": 0,

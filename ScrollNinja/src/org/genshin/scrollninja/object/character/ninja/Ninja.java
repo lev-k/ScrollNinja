@@ -2,7 +2,9 @@ package org.genshin.scrollninja.object.character.ninja;
 
 import org.genshin.scrollninja.object.character.ninja.controller.DefaultNinjaController;
 import org.genshin.scrollninja.object.gui.Cursor;
+import org.genshin.scrollninja.render.RenderObject;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -20,5 +22,11 @@ public class Ninja extends AbstractNinja
 		
 		//---- コントローラを設定する。
 		setController(new DefaultNinjaController(this, cursor));
+		
+		//---- night mode
+		for(RenderObject ro : getRenderObjects())
+		{
+			ro.setColor(Color.BLACK);
+		}
 	}
 }

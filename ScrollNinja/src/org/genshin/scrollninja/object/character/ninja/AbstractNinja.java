@@ -72,6 +72,8 @@ public abstract class AbstractNinja extends AbstractCharacter
 			afterimageEffectDef = JsonUtils.read("data/jsons/effect/ninja_afterimage.json", EffectDef.class);
 			afterimageEffectDef.startVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
 			afterimageEffectDef.endVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
+			afterimageEffectDef.startColor.set(0.0f, 0.0f, 0.0f, 1.0f);
+			afterimageEffectDef.endColor.set(0.0f, 0.0f, 0.0f, 0.0f);
 		}
 	}
 	

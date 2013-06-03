@@ -7,11 +7,11 @@
     },
     "bodyEditorFixtures": [
         {
-            "filePath": "data/jsons/collision/stage_test_bodyeditor.json",
+            "filePath": "data/jsons/collision/01",
             "fixtures": [
                 {
-                    "name": "terrain",
-                    "scale": 3840,
+                    "name": "Name",
+                    "scale": 8192,
                     "density": 1,
                     "friction": 0.5,
                     "restitution": 0,

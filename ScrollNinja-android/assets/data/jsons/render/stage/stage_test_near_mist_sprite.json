@@ -1,0 +1,21 @@
+{
+    "textureFilePath": "data/textures/stage/mist.png",
+    "uv": {
+        "x": 0,
+        "y": 648,
+        "width": 6200,
+        "height": 1400
+    },
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "size": {
+        "x": 6200,
+        "y": 1400
+    },
+    "origin": {
+        "x": 0,
+        "y": 0
+    }
+}
