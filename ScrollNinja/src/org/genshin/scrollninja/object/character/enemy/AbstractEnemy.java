@@ -2,10 +2,17 @@ package org.genshin.scrollninja.object.character.enemy;
 
 import org.genshin.engine.system.factory.AbstractFlyweightFactory;
 import org.genshin.engine.utils.AbstractFSM;
+import org.genshin.scrollninja.GlobalDefine;
 import org.genshin.scrollninja.object.attack.AbstractAttack;
 import org.genshin.scrollninja.object.character.AbstractCharacter;
+import org.genshin.scrollninja.object.effect.CopyEffect;
+import org.genshin.scrollninja.object.effect.EffectDef;
 import org.genshin.scrollninja.object.weapon.AbstractWeapon;
+import org.genshin.scrollninja.render.AnimationRenderObject;
+import org.genshin.scrollninja.render.RenderObject;
+import org.genshin.scrollninja.utils.JsonUtils;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,6 +41,14 @@ public abstract class AbstractEnemy extends AbstractCharacter
 		
 		stateFactory = createStateFactory();
 		state = stateFactory.get("Patrol");
+		
+		//---- 残像エフェクトの定義
+		if(afterimageEffectDef == null)
+		{
+			afterimageEffectDef = JsonUtils.read("data/jsons/effect/enemy_afterimage.json", EffectDef.class);
+			afterimageEffectDef.startVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
+			afterimageEffectDef.endVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
+		}
 	}
 	
 	@Override
@@ -60,6 +75,26 @@ public abstract class AbstractEnemy extends AbstractCharacter
 		
 		//---- 追跡対象は毎フレームクリアしておく。
 		chaseTarget = null;
+		
+		//---- 残像エフェクト
+		// TODO 残像は常に出すワケではない？
+		for(RenderObject ro : getRenderObjects())
+		{
+			final AnimationRenderObject aro = (AnimationRenderObject)ro;
+			
+			//---- コピーエフェクトを生成する前にアニメーションを一時停止しておく。
+			final boolean oldPaused = aro.isAnimationPaused();
+			aro.pauseAnimation();
+			
+			//---- コピーエフェクトを生成する。
+			new CopyEffect(aro, afterimageEffectDef, aro.getDepth()-1);
+			
+			//---- アニメーションの一時停止状態を元に戻す
+			if(!oldPaused)
+			{
+				aro.resumeAnimation();
+			}
+		}
 		
 		//---- お前はもう死んでいる。
 		if(isDead())
@@ -134,6 +169,9 @@ public abstract class AbstractEnemy extends AbstractCharacter
 	
 	/** 追跡する対象となるキャラクター */
 	private AbstractCharacter chaseTarget = null;
+	
+	/** 残像エフェクトの定義 */
+	private static EffectDef afterimageEffectDef = null;
 	
 	
 	/**

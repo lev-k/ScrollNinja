@@ -1,5 +1,6 @@
 package org.genshin.scrollninja.screen;
 
+import org.genshin.scrollninja.Global;
 import org.genshin.scrollninja.collision.CollisionDispatcher;
 import org.genshin.scrollninja.object.character.AbstractCharacter;
 import org.genshin.scrollninja.object.character.ninja.Ninja;
@@ -43,6 +44,9 @@ public class GameScreen extends AbstractScreen
 		cameraTranslater.addTargetObject(getCursor());
 		cameraTranslater.addTargetObject(ninja);
 		cameraTranslater.setTranslateArea(-stageSize.x * 0.5f, -stageSize.y * 0.5f, stageSize.x, stageSize.y);
+
+		Global.camera.position.x = ninja.getPositionX();
+		Global.camera.position.y = ninja.getPositionY();
 	}
 
 	@Override

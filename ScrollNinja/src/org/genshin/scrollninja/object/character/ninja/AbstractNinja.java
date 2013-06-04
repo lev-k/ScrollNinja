@@ -68,14 +68,12 @@ public abstract class AbstractNinja extends AbstractCharacter
 		setAnimation("Stay");
 		
 		//---- 残像エフェクトの定義
-		final Color color = new Color(0.0f, 0.0f, 60/255.0f, 1.0f);
+		final Color color = new Color(0.1f, 0.1f, 0.5f, 1.0f);
 		if(afterimageEffectDef == null)
 		{
 			afterimageEffectDef = JsonUtils.read("data/jsons/effect/ninja_afterimage.json", EffectDef.class);
 			afterimageEffectDef.startVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
 			afterimageEffectDef.endVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
-			afterimageEffectDef.startColor.set(color.r, color.g, color.b, 1.0f);
-			afterimageEffectDef.endColor.set(color.r, color.g, color.b, 0.0f);
 		}
 		
 		for(RenderObject ro : getRenderObjects())

@@ -4,7 +4,7 @@
         "y": 1400
     },
     "startPosition": {
-        "x": 0,
+        "x": -3000,
         "y": 0
     },
     "collisionFilePath": "data/jsons/collision/stage_test.json",
@@ -17,6 +17,26 @@
                     "position": {
                         "x": 0,
                         "y": 0
+                    }
+                }
+            ]
+        },
+        {
+            "scale": 1,
+            "backgrounds": [
+                {
+                    "spriteFilePath": "data/jsons/render/stage/stage_test_far_dust_sprite.json",
+                    "animationFilePath": "data/jsons/render/stage/stage_test_far_dust_animation.json",
+                    "animationName": "UVScroll",
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "color": {
+	                    "r": 0,
+	                    "g": 0,
+	                    "b": 0,
+	                    "a": 1
                     }
                 }
             ]
@@ -43,6 +63,26 @@
                     "position": {
                         "x": 0,
                         "y": 0
+                    }
+                }
+            ]
+        },
+        {
+            "scale": 1.5,
+            "backgrounds": [
+                {
+                    "spriteFilePath": "data/jsons/render/stage/stage_test_near_leaf_sprite.json",
+                    "animationFilePath": "data/jsons/render/stage/stage_test_near_leaf_animation.json",
+                    "animationName": "UVScroll",
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "color": {
+	                    "r": 1,
+	                    "g": 1,
+	                    "b": 1,
+	                    "a": 0.2
                     }
                 }
             ]
