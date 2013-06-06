@@ -15,7 +15,6 @@ import org.genshin.scrollninja.object.character.enemy.TestEnemy;
 import org.genshin.scrollninja.object.terrain.Terrain;
 import org.genshin.scrollninja.object.utils.RespawnManager;
 import org.genshin.scrollninja.utils.JsonUtils;
-import org.genshin.scrollninja.utils.debug.DebugTool;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

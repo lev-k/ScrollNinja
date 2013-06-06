@@ -7,7 +7,6 @@ import java.util.Map;
 import org.genshin.engine.system.Disposable;
 import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
 import org.genshin.scrollninja.collision.box2d.Box2dUtils;
-import org.genshin.scrollninja.utils.debug.DebugTool;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
