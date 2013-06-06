@@ -3,24 +3,23 @@
         "x": 64,
         "y": 64
     },
-    "textureAnimations": [
+    "animations": [
         {
+        	"@type": "Texture",
             "name": "Walk",
-            "animation": {
-                "textureFilePath": "data/textures/enemy/enemy.png",
-                "start": {
-                    "x": 0,
-                    "y": 1
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3
-                ],
-                "time": 15,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/enemy/enemy.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 1
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 15
         }
     ]
 }

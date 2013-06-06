@@ -8,38 +8,7 @@
     "fixtures": [
         {
             "@type": "Default",
-            "name": "Body",
-            "fixtureDef": {
-                "density": 0,
-                "friction": 0,
-                "restitution": 0,
-                "isSensor": false
-            },
-            "filter": {
-                "category": "Enemy",
-                "ignoreCategories": [
-                    "Player",
-                    "Enemy",
-                    "Vision",
-                    "Item"
-                ]
-            },
-            "shape": {
-                "@type": "Rectangle",
-                "size": {
-                    "x": 32,
-                    "y": 32
-                },
-                "offset": {
-                    "x": 0,
-                    "y": 16
-                },
-                "degrees": 0
-            }
-        },
-        {
-            "@type": "Default",
-            "name": "Foot",
+            "name": "Circle",
             "fixtureDef": {
                 "density": 0,
                 "friction": 0.2,
@@ -47,8 +16,10 @@
                 "isSensor": false
             },
             "filter": {
-                "category": "Enemy",
+                "category": "Unknown",
                 "ignoreCategories": [
+                    "Unknown",
+                    "Terrain",
                     "Player",
                     "Enemy",
                     "Vision",
@@ -58,7 +29,7 @@
             },
             "shape": {
                 "@type": "Circle",
-                "radius": 15,
+                "radius": 1,
                 "position": {
                     "x": 0,
                     "y": 0
@@ -67,18 +38,19 @@
         },
         {
             "@type": "Default",
-            "name": "Vision",
+            "name": "Hoge",
             "fixtureDef": {
                 "density": 0,
-                "friction": 0,
+                "friction": 0.2,
                 "restitution": 0,
-                "isSensor": true
+                "isSensor": false
             },
             "filter": {
-                "category": "Vision",
+                "category": "Unknown",
                 "ignoreCategories": [
                     "Unknown",
                     "Terrain",
+                    "Player",
                     "Enemy",
                     "Vision",
                     "Attack",
@@ -88,15 +60,66 @@
             "shape": {
                 "@type": "Rectangle",
                 "size": {
-                    "x": -128,
-                    "y": 16
+                    "x": 0,
+                    "y": 0
                 },
                 "offset": {
-                    "x": 256,
-                    "y": 64
+                    "x": 0,
+                    "y": 0
                 },
                 "degrees": 0
             }
+        },
+        {
+            "@type": "Default",
+            "name": "Edge",
+            "fixtureDef": {
+                "density": 0,
+                "friction": 0.2,
+                "restitution": 0,
+                "isSensor": false
+            },
+            "filter": {
+                "category": "Unknown",
+                "ignoreCategories": [
+                    "Unknown",
+                    "Terrain",
+                    "Player",
+                    "Enemy",
+                    "Vision",
+                    "Attack",
+                    "Item"
+                ]
+            },
+            "shape": {
+                "@type": "Edge",
+                "length": 0,
+                "offset": 0
+            }
+        },
+        {
+            "@type": "BodyEditor",
+            "name": "Rectangle",
+            "fixtureDef": {
+                "density": 0,
+                "friction": 0.2,
+                "restitution": 0,
+                "isSensor": false
+            },
+            "filter": {
+                "category": "Unknown",
+                "ignoreCategories": [
+                    "Unknown",
+                    "Terrain",
+                    "Player",
+                    "Enemy",
+                    "Vision",
+                    "Attack",
+                    "Item"
+                ]
+            },
+            "filePath": "data/jsons/collision/hoge.json",
+            "scale": 1
         }
     ]
 }

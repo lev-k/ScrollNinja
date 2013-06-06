@@ -114,25 +114,37 @@ final class EnabledDebugImpl implements DebugImplInterface
 		createHeader(consoleLogBuf);
 		
 		//---- メッセージを出力する。
-		for(Field field : object.getClass().getDeclaredFields())
+		if(object != null)
 		{
-			consoleLogBuf.append("\n  ");
-			consoleLogBuf.append(field.getName());
-			consoleLogBuf.append(" = ");
+			// クラス
+			consoleLogBuf.append("\n  class = ");
+			consoleLogBuf.append(object.getClass().getName());
 			
-			try
+			// フィールド
+			for(Field field : object.getClass().getDeclaredFields())
 			{
-				field.setAccessible(true);
-				consoleLogBuf.append(field.get(object).toString());
+				consoleLogBuf.append("\n  ");
+				consoleLogBuf.append(field.getName());
+				consoleLogBuf.append(" = ");
+				
+				try
+				{
+					field.setAccessible(true);
+					consoleLogBuf.append(field.get(object).toString());
+				}
+				catch (IllegalArgumentException e)
+				{
+					e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{
+					e.printStackTrace();
+				}
 			}
-			catch (IllegalArgumentException e)
-			{
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
+		}
+		else
+		{
+			consoleLogBuf.append("null");
 		}
 		
 		//---- コンソールに出力する。

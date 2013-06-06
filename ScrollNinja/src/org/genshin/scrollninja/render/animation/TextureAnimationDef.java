@@ -8,23 +8,21 @@ import org.genshin.engine.utils.Point;
  * @since		1.0
  * @version		1.0
  */
-class TextureAnimationDef
+class TextureAnimationDef extends AbstractAnimationDef
 {
-	/** テクスチャのパス */
-	public String textureFilePath;
+	@Override
+	AnimationInterface generate()
+	{
+		return new TextureAnimation(this);
+	}
 	
-	/** UVマップの大きさ */
-	public Point uvSize;
 	
 	/** アニメーションの初期コマ */
-	public Point start;
+	public Point startIndex;
 	
 	/** アニメーションのフレーム番号を再生順に格納した配列 */
 	public int[] frames;
 	
 	/** アニメーションの再生速度（1コマあたりの経過フレーム数） */
-	public int time;
-	
-	/** ループフラグ */
-	public boolean looping;
+	public int oneFrameCount;
 }

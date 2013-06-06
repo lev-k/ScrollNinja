@@ -3,145 +3,138 @@
         "x": 64,
         "y": 64
     },
-    "textureAnimations": [
+    "animations": [
         {
+            "@type": "Texture",
             "name": "Stay",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja.png",
-                "start": {
-                    "x": 4,
-                    "y": 3
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3
-                ],
-                "time": 6,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/ninja/ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 4,
+                "y": 3
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 6
         },
         {
+            "@type": "Texture",
             "name": "Run",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja.png",
-                "start": {
-                    "x": 0,
-                    "y": 1
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "time": 6,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/ninja/ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 1
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "oneFrameCount": 6
         },
         {
+            "@type": "Texture",
             "name": "Dash",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja.png",
-                "start": {
-                    "x": 0,
-                    "y": 2
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "time": 4,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/ninja/ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 2
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "oneFrameCount": 4
         },
         {
+            "@type": "Texture",
             "name": "Jump",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja.png",
-                "start": {
-                    "x": 0,
-                    "y": 1
-                },
-                "frames": [
-                    0
-                ],
-                "time": 6,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/ninja/ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 1
+            },
+            "frames": [
+                0
+            ],
+            "oneFrameCount": 6
         },
         {
+            "@type": "Texture",
             "name": "Kaginawa",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja.png",
-                "start": {
-                    "x": 0,
-                    "y": 5
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3
-                ],
-                "time": 6,
-                "looping": true
-            }
+            "textureFilePath": "data/textures/ninja/ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 5
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 6
         },
         {
+            "@type": "Texture",
             "name": "Slash",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja_attack.png",
-                "start": {
-                    "x": 0,
-                    "y": 0
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    4,
-                    4,
-                    4,
-                    4
-                ],
-                "time": 3,
-                "looping": false
-            }
+            "textureFilePath": "data/textures/ninja/ninja_attack.png",
+            "looping": false,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                4,
+                4,
+                4,
+                4
+            ],
+            "oneFrameCount": 3
         },
         {
+            "@type": "Texture",
             "name": "FireSlash",
-            "animation": {
-                "textureFilePath": "data/textures/ninja/ninja_attack.png",
-                "start": {
-                    "x": 0,
-                    "y": 0
-                },
-                "frames": [
-                    0,
-                    1,
-                    1,
-                    2,
-                    2,
-                    3,
-                    4,
-                    4,
-                    4,
-                    4,
-                    4
-                ],
-                "time": 3,
-                "looping": false
-            }
+            "textureFilePath": "data/textures/ninja/ninja_attack.png",
+            "looping": false,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                1,
+                2,
+                2,
+                3,
+                4,
+                4,
+                4,
+                4,
+                4
+            ],
+            "oneFrameCount": 3
         }
     ]
 }

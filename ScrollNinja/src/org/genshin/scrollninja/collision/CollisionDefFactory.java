@@ -1,9 +1,9 @@
 package org.genshin.scrollninja.collision;
 
 import org.genshin.engine.system.factory.AbstractFlyweightFactory;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Json;
+import org.genshin.scrollninja.GlobalDefine;
+import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
+import org.genshin.scrollninja.utils.JsonUtils;
 
 /**
  * 衝突判定の初期化用定義オブジェクトの生成を管理するクラス
@@ -33,9 +33,17 @@ class CollisionDefFactory extends AbstractFlyweightFactory<String, CollisionDef>
 	@Override
 	protected CollisionDef create(String key)
 	{
-		Json json = new Json();
+		final CollisionDef def = JsonUtils.read(key, CollisionDef.class);
 		
-		return json.fromJson(CollisionDef.class, Gdx.files.internal(key));
+		// test
+		final float worldScale = GlobalDefine.INSTANCE.WORLD_SCALE;
+		def.bodyDef.position.mul(worldScale);
+		for(AbstractFixtureGenerator fixtureGenerator : def.fixtures)
+		{
+			fixtureGenerator.setScale(worldScale);
+		}
+		
+		return def;
 	}
 	
 	/** シングルトンインスタンス */

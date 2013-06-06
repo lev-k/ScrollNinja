@@ -25,27 +25,48 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	 * コンストラクタ
 	 * @param spriteFilePath	スプライトの定義ファイルのパス
 	 * @param posture			位置情報
-	 * @param depth				描画深度（値が大きいものを手前に描画する）
 	 */
-	public RenderObject(String spriteFilePath, PostureInterface posture, int depth)
+	public RenderObject(String spriteFilePath, PostureInterface posture)
 	{
-		//---- フィールドを初期化する。
-		sprite = SpriteFactory.getInstance().get(spriteFilePath);
-		this.posture = posture;
-		this.depth = depth;
-		
-		//---- 描画管理オブジェクトに自身を追加する。
-		Global.renderableManager.add(this, this.depth);
+		this(spriteFilePath, posture, GlobalDefine.RenderDepth.DEFAULT);
 	}
 	
 	/**
 	 * コンストラクタ
 	 * @param spriteFilePath	スプライトの定義ファイルのパス
 	 * @param posture			位置情報
+	 * @param depth				描画深度（値が大きいものを手前に描画する）
 	 */
-	public RenderObject(String spriteFilePath, PostureInterface posture)
+	public RenderObject(String spriteFilePath, PostureInterface posture, int depth)
 	{
-		this(spriteFilePath, posture, GlobalDefine.RenderDepth.DEFAULT);
+		this(SpriteFactory.getInstance().get(spriteFilePath), posture, depth);
+	}
+
+	/**
+	 * コンストラクタ
+	 * @param sprite		描画するスプライト
+	 * @param posture		位置情報
+	 */
+	public RenderObject(Sprite sprite, PostureInterface posture)
+	{
+		this(sprite, posture, GlobalDefine.RenderDepth.DEFAULT);
+	}
+	
+	/**
+	 * コンストラクタ
+	 * @param sprite		描画するスプライト
+	 * @param posture		位置情報
+	 * @param depth			描画深度（値が大きいものを手前に描画する）
+	 */
+	public RenderObject(Sprite sprite, PostureInterface posture, int depth)
+	{
+		//---- フィールドを初期化する。
+		this.sprite = sprite;
+		this.posture = posture;
+		this.depth = depth;
+		
+		//---- 描画管理オブジェクトに自身を追加する。
+		Global.renderableManager.add(this, this.depth);
 	}
 	
 	/**

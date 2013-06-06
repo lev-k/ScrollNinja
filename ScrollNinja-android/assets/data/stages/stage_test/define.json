@@ -1,0 +1,299 @@
+{
+    "startPosition": {
+        "x": 0,
+        "y": 0
+    },
+    "backgroundLayers": [
+        {
+            "scale": 0.5,
+            "backgrounds": [
+                {
+                	"spriteDef": {
+						"textureFilePath": "data/textures/stage/test_far_03.png",
+						"uv": {
+							"x": 0,
+							"y": 798,
+							"width": 1920,
+							"height": 1250
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+				}
+            ]
+        },
+        {
+            "scale": 0.666666667,
+            "backgrounds": [
+            	{
+            		"spriteDef": {
+		        		"textureFilePath": "data/textures/stage/test_far_02.png",
+						"uv": {
+							"x": 0,
+							"y": 381,
+							"width": 2560,
+							"height": 1667
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+            		}
+            	}
+            ]
+        },
+        {
+            "scale": 0.703125,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_far_01.png",
+						"uv": {
+							"x": 0,
+							"y": 290,
+							"width": 2700,
+							"height": 1758
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+                }
+            ]
+        },
+        {
+            "scale": 1,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_near_01.png",
+						"uv": {
+							"x": 0,
+							"y": 1596,
+							"width": 3840,
+							"height": 2500
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+                }
+            ]
+        },
+        {
+            "name": "terrain",
+            "scale": 1
+        },
+        {
+            "name": "player"
+        },
+        {
+            "scale": 1.020833333,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_near_02.png",
+						"uv": {
+							"x": 0,
+							"y": 1544,
+							"width": 3920,
+							"height": 2552
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+                }
+            ]
+        },
+        {
+            "scale": 2,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_light_01.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 30720,
+							"height": 20000
+						},
+						"position": {
+							"x": 1920,
+							"y": 1250
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					},
+                    "animationSetDef": {
+						"uvSize": {
+							"x": 30720,
+							"y": 20000
+						},
+						"animations": [
+							{
+								"@type": "UVScroll",
+								"name": "UVScroll",
+								"textureFilePath": "data/textures/stage/test_light_01.png",
+								"looping": true,
+								"startPosition": {
+									"x": 4096,
+									"y": 4096
+								},
+								"endPosition": {
+									"x": 0,
+									"y": 0
+								},
+								"totalTime": 30
+							}
+						]
+					},
+                    "animationName": "UVScroll",
+                    "color": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 0.25
+                    }
+                }
+            ]
+        },
+        {
+            "scale": 4,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_near_03.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 2048,
+							"height": 256
+						},
+						"position": {
+		                    "x": 0,
+		                    "y": -1010
+						},
+						"size": {
+							"x": 3840,
+							"y": 480
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+                }
+            ]
+        },
+        {
+            "scale": 4.266666667,
+            "backgrounds": [
+                {
+                    "spriteDef": {
+						"textureFilePath": "data/textures/stage/test_light_02.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 3840,
+							"height": 2500
+						},
+						"position": {
+							"x": 0,
+							"y": 0
+						},
+						"size": {
+							"x": 3840,
+							"y": 2500
+						},
+						"origin": {
+							"x": 0,
+							"y": 0
+						}
+					}
+                }
+            ]
+        }
+    ],
+    "enemies": [
+        {
+            "position": {
+                "x": 1000,
+                "y": 0
+            }
+        }
+    ],
+    "terrains": [
+        {
+            "layerName": "terrain",
+            "bodyDef": {
+                "type": "StaticBody"
+            },
+            "fixture": {
+                "@type": "BodyEditor",
+                "name": "terrain",
+                "fixtureDef": {
+                    "density": 1,
+                    "friction": 0.5
+                },
+                "filter": {
+                    "category": "Terrain",
+                    "ignoreCategories": []
+                },
+                "filePath": "",
+                "scale": 2048
+            }
+        }
+    ]
+}

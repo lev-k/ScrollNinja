@@ -14,6 +14,17 @@ public class AnimationRenderObject extends RenderObject implements Updatable
 {
 	/**
 	 * コンストラクタ
+	 * @param spriteName		スプライト名
+	 * @param animationSetName	アニメーションセット名
+	 * @param posture			位置情報
+	 */
+	public AnimationRenderObject(String spriteName, String animationSetName, PostureInterface posture)
+	{
+		this(spriteName, animationSetName, posture, GlobalDefine.RenderDepth.DEFAULT);
+	}
+	
+	/**
+	 * コンストラクタ
 	 * @param spriteFilePath		スプライトの定義ファイルのパス
 	 * @param animationSetFilePath	アニメーションセットの定義ファイルのパス
 	 * @param posture				位置情報
@@ -32,13 +43,31 @@ public class AnimationRenderObject extends RenderObject implements Updatable
 	
 	/**
 	 * コンストラクタ
-	 * @param spriteName		スプライト名
-	 * @param animationSetName	アニメーションセット名
+	 * @param sprite			スプライト
+	 * @param animationSet		アニメーションセット
 	 * @param posture			位置情報
 	 */
-	public AnimationRenderObject(String spriteName, String animationSetName, PostureInterface posture)
+	public AnimationRenderObject(Sprite sprite, AnimationSet animationSet, PostureInterface posture)
 	{
-		this(spriteName, animationSetName, posture, GlobalDefine.RenderDepth.DEFAULT);
+		this(sprite, animationSet, posture, GlobalDefine.RenderDepth.DEFAULT);
+	}
+	
+	/**
+	 * コンストラクタ
+	 * @param sprite			スプライト
+	 * @param animationSet		アニメーションセット
+	 * @param posture			位置情報
+	 * @param depth				描画深度（値が大きいものを手前に描画する）
+	 */
+	public AnimationRenderObject(Sprite sprite, AnimationSet animationSet, PostureInterface posture, int depth)
+	{
+		super(sprite, posture, depth);
+
+		//---- アニメーションデータを生成する。
+		this.animationSet = animationSet;
+		
+		//---- 更新管理オブジェクトに自身を追加する。
+		Global.updatableManager.add(this, GlobalDefine.UpdatePriority.ANIMATION);
 	}
 	
 	/**

@@ -1,24 +1,36 @@
 {
-    "body": {
-        "isDynamic": true,
-        "isBullet": true,
-        "isFixedRotation": true,
+    "bodyDef": {
+        "type": "DynamicBody",
+        "bullet": true,
+        "fixedRotation": true,
         "gravityScale": 0
     },
     "fixtures": [
         {
+            "@type": "Default",
             "name": "Attack",
-            "density": 0,
-            "friction": 0,
-            "restitution": 0,
-            "isSensor": false,
-            "edge": {
-                "length": -36,
-                "offset": 0
+            "fixtureDef": {
+                "density": 0,
+                "friction": 0,
+                "restitution": 0,
+                "isSensor": false
             },
             "filter": {
                 "category": "Attack",
-                "collisionCategories": []
+                "ignoreCategories": [
+                    "Unknown",
+                    "Terrain",
+                    "Player",
+                    "Enemy",
+                    "Vision",
+                    "Attack",
+                    "Item"
+                ]
+            },
+            "shape": {
+                "@type": "Edge",
+                "length": -36,
+                "offset": 0
             }
         }
     ]

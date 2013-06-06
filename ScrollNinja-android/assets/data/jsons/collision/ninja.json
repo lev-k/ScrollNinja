@@ -1,59 +1,63 @@
 {
-    "body": {
-        "isDynamic": true,
-        "isBullet": true,
-        "isFixedRotation": true,
+    "bodyDef": {
+        "type": "DynamicBody",
+        "bullet": true,
+        "fixedRotation": true,
         "gravityScale": 1
     },
     "fixtures": [
         {
+            "@type": "Default",
             "name": "Body",
-            "density": 0,
-            "friction": 0,
-            "restitution": 0,
-            "isSensor": false,
-            "rectangle": {
-                "offset": {
-                    "x": 0,
-                    "y": 16
-                },
+            "fixtureDef": {
+                "density": 0,
+                "friction": 0,
+                "restitution": 0,
+                "isSensor": false
+            },
+            "filter": {
+                "category": "Player",
+                "ignoreCategories": [
+                    "Player",
+                    "Enemy"
+                ]
+            },
+            "shape": {
+                "@type": "Rectangle",
                 "size": {
                     "x": 32,
                     "y": 32
                 },
+                "offset": {
+                    "x": 0,
+                    "y": 16
+                },
                 "degrees": 0
-            },
-            "filter": {
-                "category": "Player",
-                "collisionCategories": [
-                    "Terrain",
-                    "Vision",
-                    "Attack",
-                    "Item"
-                ]
             }
         },
         {
+            "@type": "Default",
             "name": "Foot",
-            "density": 0,
-            "friction": 0.2,
-            "restitution": 0,
-            "isSensor": false,
-            "circle": {
+            "fixtureDef": {
+                "density": 0,
+                "friction": 0.2,
+                "restitution": 0,
+                "isSensor": false
+            },
+            "filter": {
+                "category": "Player",
+                "ignoreCategories": [
+                    "Player",
+                    "Enemy"
+                ]
+            },
+            "shape": {
+                "@type": "Circle",
                 "radius": 15,
                 "position": {
                     "x": 0,
                     "y": 0
                 }
-            },
-            "filter": {
-                "category": "Player",
-                "collisionCategories": [
-                    "Terrain",
-                    "Vision",
-                    "Attack",
-                    "Item"
-                ]
             }
         }
     ]

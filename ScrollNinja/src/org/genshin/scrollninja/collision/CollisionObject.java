@@ -3,17 +3,14 @@ package org.genshin.scrollninja.collision;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.genshin.engine.system.Disposable;
-import org.genshin.scrollninja.collision.CollisionDef.BodyEditorFixtureDef;
-import org.genshin.scrollninja.collision.CollisionDef.FixtureDefPair;
-
-import aurelienribon.bodyeditor.BodyEditorLoader;
+import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
+import org.genshin.scrollninja.collision.box2d.Box2dUtils;
+import org.genshin.scrollninja.utils.debug.DebugTool;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -35,26 +32,30 @@ public class CollisionObject implements Disposable
 	 */
 	public CollisionObject(String collisionFilePath, World world, AbstractCollisionCallback collisionCallback)
 	{
-		collisionDef = CollisionDefFactory.getInstance().get(collisionFilePath);
+		this(CollisionDefFactory.getInstance().get(collisionFilePath), world, collisionCallback);
+	}
+	
+	/**
+	 * コンストラクタ
+	 * @param collisionDef			衝突判定の定義
+	 * @param world					所属する世界オブジェクト
+	 * @param collisionCallback		衝突処理の呼び出しに使用するコールバックオブジェクト
+	 */
+	public CollisionObject(CollisionDef collisionDef, World world, AbstractCollisionCallback collisionCallback)
+	{
+		this.collisionDef = collisionDef;
 		
 		//---- Body生成
 		body = world.createBody(collisionDef.bodyDef);
 		body.setUserData(collisionCallback);
 		
 		//---- Fixture生成
-		// 通常
-		for(Entry<String, FixtureDef> entry : collisionDef.fixtureDefs.entrySet())
+		for(AbstractFixtureGenerator generator : collisionDef.fixtures)
 		{
-			fixtures.put(entry.getKey(), body.createFixture(entry.getValue()));
-		}
-		
-		// BodyEditor
-		for(BodyEditorFixtureDef def : collisionDef.bodyEditorFixtureDefs)
-		{
-			final BodyEditorLoader loader = new BodyEditorLoader(def.jsonString);
-			for(FixtureDefPair pair : def.fixtureDefPairs)
+			final Fixture fixture = generator.generate(body);
+			if(fixture != null)
 			{
-				loader.attachFixture(body, pair.name, pair.fixtureDef, pair.scale);
+				fixtures.put(generator.name, fixture);
 			}
 		}
 	}
@@ -92,9 +93,7 @@ public class CollisionObject implements Disposable
 	 */
 	public void addCollisionCategory(String fixtureName, String categoryName)
 	{
-		final Filter filter = getFixture(fixtureName).getFilterData();
-		filter.maskBits |= CategoryBitsFactory.getInstance().get(categoryName);
-		getFixture(fixtureName).setFilterData(filter);
+		Box2dUtils.addCollisionCategory(getFixture(fixtureName), categoryName);
 	}
 	
 	/**
@@ -103,10 +102,10 @@ public class CollisionObject implements Disposable
 	 */
 	public void flipX(boolean flipX)
 	{
-		for(Entry<String, FixtureDef> entry : collisionDef.fixtureDefs.entrySet())
+		for(AbstractFixtureGenerator generator : collisionDef.fixtures)
 		{
-			final String name = entry.getKey();
-			final FixtureDef fd = entry.getValue();
+			final String name = generator.name;
+			final FixtureDef fd = generator.fixtureDef;
 			
 			if( fd.shape instanceof PolygonShape )
 			{

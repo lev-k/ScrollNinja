@@ -6,6 +6,8 @@ import org.genshin.engine.system.PostureInterface;
 import org.genshin.scrollninja.Global;
 import org.genshin.scrollninja.render.AnimationRenderObject;
 import org.genshin.scrollninja.render.RenderObject;
+import org.genshin.scrollninja.render.animation.AnimationSet;
+import org.genshin.scrollninja.render.sprite.SpriteUtils;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
@@ -20,13 +22,12 @@ public class BackgroundLayer extends AbstractBackground
 {
 	/**
 	 * コンストラクタ
-	 * @param stageSize		ステージの大きさ
 	 * @param scale			背景レイヤーの倍率
 	 * @param renderDepth	描画処理の優先順位
 	 */
-	public BackgroundLayer(Vector2 stageSize, float scale, int renderDepth)
+	public BackgroundLayer(float scale, int renderDepth)
 	{
-		this.stageSize.set(stageSize);
+//		this.stageSize.set(stageSize);
 		this.scale = scale;
 		this.renderDepth = renderDepth;
 	}
@@ -67,28 +68,29 @@ public class BackgroundLayer extends AbstractBackground
 	public void createBackground(BackgroundDef def)
 	{
 		//---- エラーチェック
-		if(def.spriteFilePath == null)
+		if(def.spriteDef == null)
 			return;
 		
-		if(def.position == null)
-			def.position = Vector2.Zero;
+//		if(def.position == null)
+//			def.position = Vector2.Zero;
 		
 		//---- 位置情報
-		final PostureInterface posture = new BackgroundPosture(def.position.mul(scale), 0.0f);
+//		final PostureInterface posture = new BackgroundPosture(def.position.mul(scale), 0.0f);
+		final PostureInterface posture = new BackgroundPosture(Vector2.Zero, 0.0f);
 		RenderObject renderObject = null;
 		
 		//---- 描画オブジェクト生成
 		// アニメーションあり
-		if(def.animationFilePath != null)
+		if(def.animationSetDef != null)
 		{
-			final AnimationRenderObject ro = new AnimationRenderObject(def.spriteFilePath, def.animationFilePath, posture, renderDepth);
+			final AnimationRenderObject ro = new AnimationRenderObject(SpriteUtils.createSprite(def.spriteDef), new AnimationSet(def.animationSetDef), posture, renderDepth);
 			ro.setAnimation(def.animationName);
 			renderObject = ro;
 		}
 		// アニメーションなし
 		else
 		{
-			renderObject = new RenderObject(def.spriteFilePath, posture, renderDepth);
+			renderObject = new RenderObject(SpriteUtils.createSprite(def.spriteDef), posture, renderDepth);
 		}
 		
 		// 色適用

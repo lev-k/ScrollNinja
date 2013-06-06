@@ -2,6 +2,7 @@ package org.genshin.scrollninja.stage;
 
 import org.genshin.engine.system.Disposable;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,10 +14,10 @@ import com.badlogic.gdx.math.Vector2;
 public interface StageInterface extends Disposable
 {
 	/**
-	 * ステージの大きさを取得する。
-	 * @return		ステージの大きさ
+	 * ステージの範囲を取得する。
+	 * @return		ステージの範囲
 	 */
-	public Vector2 getSize();
+	public Rectangle getArea();
 	
 	/**
 	 * ステージ開始時のプレイヤー座標を取得する。

@@ -2,6 +2,7 @@ package org.genshin.scrollninja.object.terrain;
 
 import org.genshin.engine.system.Disposable;
 import org.genshin.scrollninja.collision.AbstractCollisionCallback;
+import org.genshin.scrollninja.collision.CollisionDef;
 import org.genshin.scrollninja.collision.CollisionObject;
 
 import com.badlogic.gdx.math.Vector2;
@@ -27,10 +28,25 @@ public class Terrain implements Disposable
 		collisionObject = new CollisionObject(collisionFilePath, world, new TerrainCollisionCallback());
 	}
 	
+	/**
+	 * コンストラクタ
+	 * @param collisionFilePath		衝突判定の初期化用ファイルへのパス
+	 * @param world					所属する世界オブジェクト
+	 * @param position				座標
+	 */
 	public Terrain(String collisionFilePath, World world, Vector2 position)
 	{
 		this(collisionFilePath, world);
 		
+		final Body body = collisionObject.getBody();
+		final Vector2 oldPosition = body.getPosition();
+		body.setTransform(oldPosition.add(position), body.getAngle());
+	}
+	
+	public Terrain(CollisionDef collisionDef, World world, Vector2 position)
+	{
+		collisionObject = new CollisionObject(collisionDef, world, new TerrainCollisionCallback());
+
 		final Body body = collisionObject.getBody();
 		final Vector2 oldPosition = body.getPosition();
 		body.setTransform(oldPosition.add(position), body.getAngle());

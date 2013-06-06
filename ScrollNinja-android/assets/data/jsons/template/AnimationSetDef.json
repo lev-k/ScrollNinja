@@ -1,0 +1,48 @@
+{
+	"uvSize": {
+		"x": 16,
+		"y": 16
+	},
+    "animations": [
+        {
+            "@type": "Texture",
+            "name": "Hoge",
+            "textureFilePath": "data/textures/dummy.png",
+			"uvSize": {
+				"x": 16,
+				"y": 16
+			},
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 3
+        },
+        {
+            "@type": "UVScroll",
+            "name": "Piyo",
+            "textureFilePath": "data/textures/dummy.png",
+			"uvSize": {
+				"x": 16,
+				"y": 16
+			},
+            "looping": true,
+            "startPosition": {
+                "x": 0,
+                "y": 0
+            },
+            "endPosition": {
+                "x": 0,
+                "y": 0
+            },
+            "totalTime": 60
+        }
+    ]
+}

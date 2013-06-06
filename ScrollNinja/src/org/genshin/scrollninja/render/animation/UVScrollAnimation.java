@@ -30,15 +30,15 @@ public class UVScrollAnimation implements AnimationInterface
 		textureRegion.setTexture(texture);
 		
 		//---- UV設定
-		startPosition.set(def.start.x * invWidth, def.start.y * invHeight);
+		startPosition.set(def.startPosition.x * invWidth, def.startPosition.y * invHeight);
 		uvSize.set(def.uvSize.x * invWidth, def.uvSize.y * invHeight);
 		
 		//---- アニメーションの終了時間
-		endTime = def.time;
+		endTime = def.totalTime;
 		
 		//---- アニメーションの速度設定
 		scrollSpeed
-			.set((def.end.x - def.start.x) * invWidth, (def.end.y - def.start.y) * invHeight)
+			.set((def.endPosition.x - def.startPosition.x) * invWidth, (def.endPosition.y - def.startPosition.y) * invHeight)
 			.mul(1.0f / endTime);
 		
 		//---- ループフラグ

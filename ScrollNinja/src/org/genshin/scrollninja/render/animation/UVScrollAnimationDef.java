@@ -1,6 +1,6 @@
 package org.genshin.scrollninja.render.animation;
 
-import org.genshin.engine.utils.Point;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * UVスクロールアニメーションの初期化用定義
@@ -8,23 +8,21 @@ import org.genshin.engine.utils.Point;
  * @since		1.0
  * @version	1.0
  */
-public class UVScrollAnimationDef
+public class UVScrollAnimationDef extends AbstractAnimationDef
 {
-	/** テクスチャファイルのパス */
-	public String textureFilePath;
+	@Override
+	AnimationInterface generate()
+	{
+		return new UVScrollAnimation(this);
+	}
 	
-	/** UVマップの大きさ */
-	public Point uvSize;
 	
 	/** アニメーション開始時のUV座標 */
-	public Point start;
+	public Vector2 startPosition;
 	
 	/** アニメーション終了時のUV座標 */
-	public Point end;
+	public Vector2 endPosition;
 	
 	/** アニメーション開始から終了までの時間（単位：秒） */
-	public float time;
-	
-	/** ループフラグ */
-	public boolean looping;
+	public float totalTime;
 }

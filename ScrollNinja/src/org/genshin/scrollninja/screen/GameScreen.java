@@ -9,7 +9,6 @@ import org.genshin.scrollninja.object.utils.RespawnManager;
 import org.genshin.scrollninja.stage.Stage;
 import org.genshin.scrollninja.stage.StageInterface;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -31,7 +30,7 @@ public class GameScreen extends AbstractScreen
 		collisionDispatcher = new CollisionDispatcher(world);
 		
 		//---- ステージを生成する。
-		stage = new Stage(world, "data/jsons/stage/stage_test.json");
+		stage = new Stage(world, "data/stages/stage_test");
 		
 		//---- 忍者を生成する。
 		final AbstractCharacter ninja = new Ninja(world, stage.getStartPosition(), getCursor());
@@ -39,10 +38,9 @@ public class GameScreen extends AbstractScreen
 		
 		//---- カメラの追従設定
 		final CameraTranslater cameraTranslater = new CameraTranslater();
-		final Vector2 stageSize = stage.getSize();
 		cameraTranslater.addTargetObject(getCursor());
 		cameraTranslater.addTargetObject(ninja);
-		cameraTranslater.setTranslateArea(-stageSize.x * 0.5f, -stageSize.y * 0.5f, stageSize.x, stageSize.y);
+		cameraTranslater.setTranslateArea(stage.getArea());
 	}
 
 	@Override

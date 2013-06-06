@@ -1,4 +1,4 @@
-package org.genshin.scrollninja.collision;
+package org.genshin.scrollninja.collision.box2d;
 
 import org.genshin.engine.system.factory.AbstractFlyweightFactory;
 import org.genshin.scrollninja.utils.debug.DebugTool;

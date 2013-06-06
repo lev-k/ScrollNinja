@@ -1,0 +1,7 @@
+{
+	"map": {
+		"@type": "HashMap",
+		"Foo": 10,
+		"Bar": 200
+	}
+}

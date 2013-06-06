@@ -125,6 +125,15 @@ public class CameraTranslater extends AbstractObject
 	
 	/**
 	 * 移動可能な範囲を設定する。
+	 * @param rect		移動可能な範囲
+	 */
+	public void setTranslateArea(Rectangle rect)
+	{
+		setTranslateArea(rect.x, rect.y, rect.width, rect.height);
+	}
+	
+	/**
+	 * 移動可能な範囲を設定する。
 	 * @param x			X座標
 	 * @param y			Y座標
 	 * @param width		X方向の大きさ

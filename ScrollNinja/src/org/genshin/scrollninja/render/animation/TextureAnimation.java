@@ -30,12 +30,12 @@ public class TextureAnimation implements AnimationInterface
 		{
 			textureRegions[i] = new TextureRegion(
 				TextureFactory.getInstance().get(def.textureFilePath),
-				(def.start.x + def.frames[i]) * def.uvSize.x, def.start.y * def.uvSize.y,
+				(def.startIndex.x + def.frames[i]) * def.uvSize.x, def.startIndex.y * def.uvSize.y,
 				def.uvSize.x, def.uvSize.y
 			);
 		}
 		
-		animation = new Animation(def.time / 60.0f, textureRegions);
+		animation = new Animation(def.oneFrameCount / 60.0f, textureRegions);
 		animation.setPlayMode(looping ? Animation.LOOP : Animation.NORMAL);
 	}
 	

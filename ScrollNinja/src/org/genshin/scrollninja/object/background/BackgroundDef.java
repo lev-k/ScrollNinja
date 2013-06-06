@@ -1,5 +1,8 @@
 package org.genshin.scrollninja.object.background;
 
+import org.genshin.scrollninja.render.animation.AnimationSetDef;
+import org.genshin.scrollninja.render.sprite.SpriteDef;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,17 +14,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class BackgroundDef
 {
-	/** スプライトを定義したファイルのパス */
-	public 	String spriteFilePath;
+	/** スプライトの初期化用定義 */
+	public 	SpriteDef spriteDef;
 	
-	/** アニメーションを定義したファイルのパス */
-	public String animationFilePath;
+	/** アニメーションセットの初期化用定義 */
+	public AnimationSetDef animationSetDef;
 	
 	/** 再生するアニメーションの名前 */
 	public String animationName;
-	
-	/** 背景オブジェクトの座標 */
-	public Vector2 position;
 	
 	/** 色 */
 	public Color color;

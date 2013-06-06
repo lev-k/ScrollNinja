@@ -3,54 +3,52 @@
         "x": 128,
         "y": 128
     },
-    "textureAnimations": [
+    "animations": [
         {
+        	"@type": "Texture",
             "name": "Slash",
-            "animation": {
-                "textureFilePath": "data/textures/effect/katana.png",
-                "start": {
-                    "x": 0,
-                    "y": 0
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    4,
-                    4,
-                    4,
-                    4
-                ],
-                "time": 3,
-                "looping": false
-            }
+            "textureFilePath": "data/textures/effect/katana.png",
+            "looping": false,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                4,
+                4,
+                4,
+                4
+            ],
+            "oneFrameCount": 3
         },
         {
+        	"@type": "Texture",
             "name": "FireSlash",
-            "animation": {
-                "textureFilePath": "data/textures/effect/katana.png",
-                "start": {
-                    "x": 0,
-                    "y": 1
-                },
-                "frames": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    6,
-                    6,
-                    6,
-                    6
-                ],
-                "time": 3,
-                "looping": false
-            }
+            "textureFilePath": "data/textures/effect/katana.png",
+            "looping": false,
+            "startIndex": {
+                "x": 0,
+                "y": 1
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                6,
+                6,
+                6,
+                6
+            ],
+            "oneFrameCount": 3
         }
     ]
 }

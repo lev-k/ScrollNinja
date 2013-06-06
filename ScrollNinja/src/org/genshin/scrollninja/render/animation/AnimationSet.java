@@ -15,28 +15,15 @@ public class AnimationSet
 	 * コンストラクタ
 	 * @param def アニメーションセットの初期化用定義
 	 */
-	AnimationSet(AnimationSetDef def)
+	public AnimationSet(AnimationSetDef def)
 	{
-		//---- テクスチャアニメーション
-		if(def.textureAnimations != null)
+		for(AbstractAnimationDef animationDef : def.animations)
 		{
-			for(TextureAnimationPair animationPair : def.textureAnimations)
-			{
-				if(animationPair.animation.uvSize == null)
-					animationPair.animation.uvSize = def.uvSize;
-				animations.put(animationPair.name, new TextureAnimation(animationPair.animation));
-			}
-		}
-		
-		//---- UVスクロールアニメーション
-		if(def.uvScrollAnimations != null)
-		{
-			for(UVScrollAnimationPair animationPair : def.uvScrollAnimations)
-			{
-				if(animationPair.animation.uvSize == null)
-					animationPair.animation.uvSize = def.uvSize;
-				animations.put(animationPair.name, new UVScrollAnimation(animationPair.animation));
-			}
+			if(animationDef.name == null || animationDef.name.isEmpty())
+				animationDef.name = "Animation" + animations.size();
+			if(animationDef.uvSize == null)
+				animationDef.uvSize = def.uvSize;
+			animations.put(animationDef.name, animationDef.generate());
 		}
 	}
 	
