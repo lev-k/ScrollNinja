@@ -75,22 +75,6 @@ public class AnimationRenderObject extends RenderObject implements Updatable
 		if(!paused)
 			timer += deltaTime * speedRatio;
 	}
-
-	@Override
-	public void render()
-	{
-		//---- アニメーションを反映する。
-		if(currentAnimation != null)
-		{
-			@SuppressWarnings("deprecation")
-			final Sprite sprite = getSprite();
-			
-			sprite.setRegion(currentAnimation.getKeyFrame(timer));
-		}
-		
-		//---- 描画処理
-		super.render();
-	}
 	
 	/**
 	 * アニメーションを一時停止する。
@@ -230,6 +214,22 @@ public class AnimationRenderObject extends RenderObject implements Updatable
 		animationRenderObject.paused = paused;
 		
 		return dest;
+	}
+
+	@Override
+	protected void localRender()
+	{
+		//---- アニメーションを反映する。
+		if(currentAnimation != null)
+		{
+			@SuppressWarnings("deprecation")
+			final Sprite sprite = getSprite();
+			
+			sprite.setRegion(currentAnimation.getKeyFrame(timer));
+		}
+		
+		//---- 描画処理
+		super.localRender();
 	}
 	
 	

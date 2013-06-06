@@ -1,10 +1,9 @@
 package org.genshin.scrollninja.render;
 
-import org.genshin.engine.system.Disposable;
 import org.genshin.engine.system.PostureInterface;
-import org.genshin.engine.system.Renderable;
 import org.genshin.scrollninja.Global;
 import org.genshin.scrollninja.GlobalDefine;
+import org.genshin.scrollninja.GlobalDefine.RenderDepth;
 import org.genshin.scrollninja.render.sprite.SpriteFactory;
 
 import com.badlogic.gdx.graphics.Color;
@@ -12,14 +11,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-
 /**
  * 描画オブジェクト
  * @author kou
  * @since		1.0
  * @version		1.0
  */
-public class RenderObject implements Renderable, Disposable, PostureInterface
+public class RenderObject extends AbstractRenderObject
 {
 	/**
 	 * コンストラクタ
@@ -29,13 +27,11 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	 */
 	public RenderObject(String spriteFilePath, PostureInterface posture, int depth)
 	{
+		super(depth);
+		
 		//---- フィールドを初期化する。
 		sprite = SpriteFactory.getInstance().get(spriteFilePath);
 		this.posture = posture;
-		this.depth = depth;
-		
-		//---- 描画管理オブジェクトに自身を追加する。
-		Global.renderableManager.add(this, this.depth);
 	}
 	
 	/**
@@ -53,7 +49,7 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	 */
 	protected RenderObject()
 	{
-		/** 何もしない */
+		super(RenderDepth.DEFAULT);
 	}
 	
 	/**
@@ -72,42 +68,8 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 		sprite = null;
 		posture = null;
 		
-		//---- 描画管理オブジェクトから自身を削除する。
-		Global.renderableManager.remove(this, depth);
-	}
-
-	@Override
-	public void render()
-	{
-		//---- 描画フラグがfalseなら描画しない。
-		if(!renderEnabled)
-			return;
-		
-		//---- 下準備
-		final SpriteBatch sb = Global.spriteBatch;
-		final float x = posture.getPositionX();
-		final float y = posture.getPositionY();
-		final float rotation = posture.getRotation();
-		final float oldScaleX = sprite.getScaleX();
-		final float oldScaleY = sprite.getScaleY();
-		final Color spriteColor = sprite.getColor();
-		final Color oldColor = spriteColor.tmp();
-		spriteColor.mul(color);
-		
-		//---- 座標、回転、拡縮率、色を反映する。
-		sprite.translate(x, y);
-		sprite.rotate(rotation);
-		sprite.setScale(oldScaleX * scale.x * flipScale.x, oldScaleY * scale.y * flipScale.y);
-		sprite.setColor(spriteColor);
-		
-		//---- 描画する。
-		sprite.draw(sb);
-		
-		//---- 座標、回転、拡縮率、色を元に戻す。
-		sprite.translate(-x, -y);
-		sprite.rotate(-rotation);
-		sprite.setScale(oldScaleX, oldScaleY);
-		sprite.setColor(oldColor);
+		//---- 基本クラスを破棄する。
+		super.dispose();
 	}
 	
 	/**
@@ -146,26 +108,6 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	public void setPosture(PostureInterface posture)
 	{
 		this.posture = posture;
-	}
-	
-	/**
-	 * 描画深度を設定する。
-	 * @param depth		描画深度（値が大きいものを手前に描画する）
-	 */
-	public void setDepth(int depth)
-	{
-		Global.renderableManager.remove(this, this.depth);
-		this.depth = depth;
-		Global.renderableManager.add(this, depth);
-	}
-	
-	/**
-	 * 描画フラグを設定する。
-	 * @param enabled	描画フラグ
-	 */
-	public void setRenderEnabled(boolean enabled)
-	{
-		renderEnabled = enabled;
 	}
 	
 	/**
@@ -240,15 +182,6 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	{
 		return posture.getRotation();
 	}
-	
-	/**
-	 * 描画深度を取得する。
-	 * @return		描画深度
-	 */
-	public int getDepth()
-	{
-		return depth;
-	}
 
 	/**
 	 * X軸方向の拡縮率を取得する。
@@ -277,15 +210,6 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	public final Sprite getSprite()
 	{
 		return sprite;
-	}
-	
-	/**
-	 * 描画フラグを取得する。
-	 * @return		描画フラグ
-	 */
-	public boolean isRenderEnabled()
-	{
-		return renderEnabled;
 	}
 	
 	/**
@@ -319,18 +243,48 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 			dest = new RenderObject();
 		}
 		
+		//---- 基本クラスの複製
+		dest.setRenderEnabled(isRenderEnabled());
+		dest.setDepth(getDepth());
+		
 		//---- フィールドをコピーする。
 		dest.sprite = sprite;
 		dest.posture = posture;
-		dest.renderEnabled = renderEnabled;
 		dest.scale.set(scale);
 		dest.flipScale.set(flipScale);
 		dest.color.set(color);
 		
-		//---- 描画深度を設定する。
-		dest.setDepth(depth);
-		
 		return dest;
+	}
+
+	@Override
+	protected void localRender()
+	{
+		//---- 下準備
+		final SpriteBatch sb = Global.spriteBatch;
+		final float x = posture.getPositionX();
+		final float y = posture.getPositionY();
+		final float rotation = posture.getRotation();
+		final float oldScaleX = sprite.getScaleX();
+		final float oldScaleY = sprite.getScaleY();
+		final Color spriteColor = sprite.getColor();
+		final Color oldColor = spriteColor.tmp();
+		spriteColor.mul(color);
+		
+		//---- 座標、回転、拡縮率、色を反映する。
+		sprite.translate(x, y);
+		sprite.rotate(rotation);
+		sprite.setScale(oldScaleX * scale.x * flipScale.x, oldScaleY * scale.y * flipScale.y);
+		sprite.setColor(spriteColor);
+		
+		//---- 描画する。
+		sprite.draw(sb);
+		
+		//---- 座標、回転、拡縮率、色を元に戻す。
+		sprite.translate(-x, -y);
+		sprite.rotate(-rotation);
+		sprite.setScale(oldScaleX, oldScaleY);
+		sprite.setColor(oldColor);
 	}
 	
 	
@@ -339,12 +293,6 @@ public class RenderObject implements Renderable, Disposable, PostureInterface
 	
 	/** 位置情報 */
 	private PostureInterface	posture;
-	
-	/** 深度（値が大きいものを手前に描画する） */
-	private int	depth;
-	
-	/** 描画フラグ */
-	private boolean renderEnabled = true;
 	
 	/** 拡縮率 */
 	private final Vector2 scale = new Vector2(1.0f, 1.0f);

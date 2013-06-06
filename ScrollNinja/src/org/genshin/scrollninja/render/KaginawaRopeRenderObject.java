@@ -40,30 +40,6 @@ public class KaginawaRopeRenderObject extends RenderObject
 	{
 		return (KaginawaRopeRenderObject)super.duplicate();
 	}
-
-	@Override
-	public void render()
-	{
-		//---- 描画フラグチェック
-		if(!isRenderEnabled())
-			return;
-		
-		//---- 縄の長さと角度を設定する。
-		@SuppressWarnings("deprecation")
-		final Sprite sprite = getSprite();
-		
-		// スプライトの大きさ
-		sprite.setSize(length, sprite.getHeight());
-		
-		// スプライトの角度
-		sprite.setRotation(angle);
-		
-		// スプライトのUVマップ
-		sprite.setRegion(0, 0, (int)(length * GlobalDefine.INSTANCE.INV_WORLD_SCALE), sprite.getRegionHeight());
-		
-		//---- 基本クラスの描画処理を実行する。
-		super.render();
-	}
 	
 	/**
 	 * 縄の長さを設定する。
@@ -101,6 +77,26 @@ public class KaginawaRopeRenderObject extends RenderObject
 		kaginawaRopeRenderObject.angle = angle;
 		
 		return dest;
+	}
+
+	@Override
+	protected void localRender()
+	{
+		//---- 縄の長さと角度を設定する。
+		@SuppressWarnings("deprecation")
+		final Sprite sprite = getSprite();
+		
+		// スプライトの大きさ
+		sprite.setSize(length, sprite.getHeight());
+		
+		// スプライトの角度
+		sprite.setRotation(angle);
+		
+		// スプライトのUVマップ
+		sprite.setRegion(0, 0, (int)(length * GlobalDefine.INSTANCE.INV_WORLD_SCALE), sprite.getRegionHeight());
+		
+		//---- 基本クラスの描画処理を実行する。
+		super.localRender();
 	}
 	
 	
