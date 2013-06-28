@@ -4,6 +4,7 @@ import org.genshin.scrollninja.render.animation.AnimationSetDef;
 import org.genshin.scrollninja.render.sprite.SpriteDef;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * 背景オブジェクトの初期化用定義
@@ -21,6 +22,9 @@ public class BackgroundDef
 	
 	/** 再生するアニメーションの名前 */
 	public String animationName;
+	
+	/** 背景オブジェクトの座標 */
+	public Vector2 position;
 	
 	/** 色 */
 	public Color color;

@@ -8,6 +8,7 @@
             "scale": 0.5,
             "backgrounds": [
                 {
+                	"@type": "Default",
                 	"spriteDef": {
 						"textureFilePath": "data/textures/stage/test_far_03.png",
 						"uv": {
@@ -28,6 +29,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -798
 					}
 				}
             ]
@@ -36,6 +41,7 @@
             "scale": 0.666666667,
             "backgrounds": [
             	{
+                	"@type": "Default",
             		"spriteDef": {
 		        		"textureFilePath": "data/textures/stage/test_far_02.png",
 						"uv": {
@@ -56,7 +62,11 @@
 							"x": 0,
 							"y": 0
 						}
-            		}
+            		},
+					"position": {
+						"x": -128,
+						"y": -798
+					}
             	}
             ]
         },
@@ -64,6 +74,7 @@
             "scale": 0.703125,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_far_01.png",
 						"uv": {
@@ -84,6 +95,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -798
 					}
                 }
             ]
@@ -92,6 +107,7 @@
             "scale": 1,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_near_01.png",
 						"uv": {
@@ -112,6 +128,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -798
 					}
                 }
             ]
@@ -127,6 +147,7 @@
             "scale": 1.020833333,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_near_02.png",
 						"uv": {
@@ -147,6 +168,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -798
 					}
                 }
             ]
@@ -155,6 +180,7 @@
             "scale": 2,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_light_01.png",
 						"uv": {
@@ -200,6 +226,10 @@
 						]
 					},
                     "animationName": "UVScroll",
+					"position": {
+						"x": -128,
+						"y": -798
+					},
                     "color": {
                         "r": 1,
                         "g": 1,
@@ -213,6 +243,7 @@
             "scale": 4,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_near_03.png",
 						"uv": {
@@ -223,7 +254,7 @@
 						},
 						"position": {
 		                    "x": 0,
-		                    "y": -1010
+		                    "y": 0
 						},
 						"size": {
 							"x": 3840,
@@ -233,6 +264,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -1808
 					}
                 }
             ]
@@ -241,6 +276,7 @@
             "scale": 4.266666667,
             "backgrounds": [
                 {
+                	"@type": "Default",
                     "spriteDef": {
 						"textureFilePath": "data/textures/stage/test_light_02.png",
 						"uv": {
@@ -261,6 +297,10 @@
 							"x": 0,
 							"y": 0
 						}
+					},
+					"position": {
+						"x": -128,
+						"y": -798
 					}
                 }
             ]
@@ -296,4 +336,5 @@
             }
         }
     ]
+
 }

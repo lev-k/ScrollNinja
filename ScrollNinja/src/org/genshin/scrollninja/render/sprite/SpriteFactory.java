@@ -1,6 +1,7 @@
 package org.genshin.scrollninja.render.sprite;
 
 import org.genshin.engine.system.factory.AbstractWeakFlyweightFactory;
+import org.genshin.scrollninja.GlobalDefine;
 import org.genshin.scrollninja.utils.JsonUtils;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -41,6 +42,12 @@ public class SpriteFactory extends AbstractWeakFlyweightFactory<String, Sprite>
 		// 読み込み失敗
 		if(spriteDef == null)
 			return null;
+		
+		//---- 世界の法則
+		final float worldScale = GlobalDefine.INSTANCE.WORLD_SCALE;
+		if(spriteDef.position != null)	spriteDef.position.mul(worldScale);
+		if(spriteDef.size != null)		spriteDef.size.mul(worldScale);
+		if(spriteDef.origin != null)	spriteDef.origin.mul(worldScale);
 		
 		//---- スプライトを生成する。
 		return SpriteUtils.createSprite(spriteDef);

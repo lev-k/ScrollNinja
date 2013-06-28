@@ -8,8 +8,10 @@ import org.genshin.scrollninja.GlobalDefine;
 import org.genshin.scrollninja.collision.CollisionDef;
 import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
 import org.genshin.scrollninja.collision.box2d.BodyEditorFixtureGenerator;
-import org.genshin.scrollninja.object.background.BackgroundDef;
+import org.genshin.scrollninja.object.background.BackgroundGeneratorInterface;
 import org.genshin.scrollninja.object.background.BackgroundLayer;
+import org.genshin.scrollninja.object.background.BackgroundLayerDef;
+import org.genshin.scrollninja.object.background.DirectoryBackgroundGenerator;
 import org.genshin.scrollninja.object.character.AbstractCharacter;
 import org.genshin.scrollninja.object.character.enemy.TestEnemy;
 import org.genshin.scrollninja.object.terrain.Terrain;
@@ -57,10 +59,16 @@ public class Stage implements StageInterface
 		
 		//---- 描画オブジェクトを生成する。
 		createBackgroundLayers(stageDef.backgroundLayers);
-		
+			
 		//---- 地形オブジェクトを生成する。
 		for(TerrainDef terrainDef : stageDef.terrains)
 			createTerrain(world, stageDir, terrainDef);
+		
+		//---- レイヤーにステージサイズを伝える
+		for(BackgroundLayer layer : backgroundLayers.values())
+		{
+			layer.setScrollArea(area);
+		}
 		
 		//---- 敵オブジェクトを生成する。
 		for(EnemyDef def : stageDef.enemies)
@@ -130,21 +138,18 @@ public class Stage implements StageInterface
 				backgroundLayerDef.scale = 1.0f;
 			}
 			
-			// 背景レイヤー生成
-			final BackgroundLayer backgroundLayer = new BackgroundLayer(backgroundLayerDef.scale, renderDepth);
-			backgroundLayers.put(backgroundLayerDef.name, backgroundLayer);
-			
-			// エラーチェック
-			if(backgroundLayerDef.backgrounds == null)
-				continue;
-			
-			// 背景オブジェクト生成
-			for(BackgroundDef backgroundDef : backgroundLayerDef.backgrounds)
+			// 世界補正
+			if(backgroundLayerDef.backgrounds != null)
 			{
-//				if(backgroundDef.position != null)
-//					backgroundDef.position.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
-				backgroundLayer.createBackground(backgroundDef);
+				for(BackgroundGeneratorInterface generator : backgroundLayerDef.backgrounds)
+				{
+					generator.setWorldScale(GlobalDefine.INSTANCE.WORLD_SCALE);
+				}
 			}
+			
+			// 背景レイヤー生成
+			final BackgroundLayer backgroundLayer = new BackgroundLayer(backgroundLayerDef, renderDepth);
+			backgroundLayers.put(backgroundLayerDef.name, backgroundLayer);
 		}
 	}
 	
@@ -166,40 +171,38 @@ public class Stage implements StageInterface
 			return;
 		
 		// jsonファイルのリストを作成する
-		final FileHandle[] children = dir.list(".json");
+		final FileHandle[] files = dir.list(".json");
 		
 		//---- 地形を生成する
 		final CollisionDef collisionDef = new CollisionDef();
 		final BodyEditorFixtureGenerator terrainFixtureGenerator = (BodyEditorFixtureGenerator)terrainDef.fixture;
 		collisionDef.bodyDef = terrainDef.bodyDef;
 		collisionDef.fixtures = new AbstractFixtureGenerator[] { terrainFixtureGenerator };
-		terrains.ensureCapacity(children.length);
+		terrains.ensureCapacity(files.length);
 		terrainFixtureGenerator.scale *= GlobalDefine.INSTANCE.WORLD_SCALE;
-		for(FileHandle handle : children)
+		final Rectangle currentArea = new Rectangle(0.0f, 0.0f, terrainFixtureGenerator.scale, terrainFixtureGenerator.scale);
+		for(FileHandle file : files)
 		{
 			//---- 地形のオフセット値を算出する
-			final String[] position = handle.nameWithoutExtension().split("_");
+			final String[] position = file.nameWithoutExtension().split("_");
 			final float center = 500.0f;
-			final float x = (Float.parseFloat(position[1]) - center) * terrainFixtureGenerator.scale;
-			final float y = (center - 1.0f - Float.parseFloat(position[0])) * terrainFixtureGenerator.scale;
-			final float w = terrainFixtureGenerator.scale;
+			currentArea.x = (Float.parseFloat(position[1]) - center) * terrainFixtureGenerator.scale;
+			currentArea.y = (center - 1.0f - Float.parseFloat(position[0])) * terrainFixtureGenerator.scale;
 			
-			//---- ステージの範囲計算
-			final float right = Math.max(x + w, area.x + area.width);
-			final float bottom = Math.max(y + w, area.y + area.height);
-			
-			area.x = Math.min(area.x, x);
-			area.y = Math.min(area.y, y);
-			area.width = right - area.x;
-			area.height = bottom - area.y;
+			//---- ステージの範囲を拡大
+			area.merge(currentArea);
 			
 			//---- 地形の衝突判定を生成する
-			terrainFixtureGenerator.filePath = handle.path();
-			final Terrain terrain = new Terrain(collisionDef, world, Vector2.tmp.set(x, y));
+			terrainFixtureGenerator.filePath = file.path();
+			final Terrain terrain = new Terrain(collisionDef, world, Vector2.tmp.set(currentArea.x, currentArea.y));
 			terrains.add(terrain);
-			
-			//---- 地形の描画オブジェクトを生成する
 		}
+
+		//---- 地形の描画オブジェクトを生成する
+		final DirectoryBackgroundGenerator generator = new DirectoryBackgroundGenerator();
+		generator.directoryPath = terrainDir;
+		generator.scale = terrainFixtureGenerator.scale;
+		generator.generate(terrainLayer);
 	}
 	
 	

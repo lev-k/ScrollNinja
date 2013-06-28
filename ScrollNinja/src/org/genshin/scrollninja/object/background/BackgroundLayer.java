@@ -10,6 +10,7 @@ import org.genshin.scrollninja.render.animation.AnimationSet;
 import org.genshin.scrollninja.render.sprite.SpriteUtils;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -22,14 +23,21 @@ public class BackgroundLayer extends AbstractBackground
 {
 	/**
 	 * コンストラクタ
-	 * @param scale			背景レイヤーの倍率
+	 * @param def			背景レイヤーの初期化用定義
 	 * @param renderDepth	描画処理の優先順位
 	 */
-	public BackgroundLayer(float scale, int renderDepth)
+	public BackgroundLayer(BackgroundLayerDef def, int renderDepth)
 	{
-//		this.stageSize.set(stageSize);
-		this.scale = scale;
+		this.scale = def.scale;
 		this.renderDepth = renderDepth;
+		
+		if(def.backgrounds != null)
+		{
+			for(BackgroundGeneratorInterface generator : def.backgrounds)
+			{
+				generator.generate(this);
+			}
+		}
 	}
 	
 	@Override
@@ -47,17 +55,22 @@ public class BackgroundLayer extends AbstractBackground
 	@Override
 	public void update(float deltaTime)
 	{
-		//---- 計算式の変形メモ
-		// X = cameraX / ((stageW - viewportW) / 2) * ((stageW - stageW * scale) / 2)
-		//   = cameraX /  (stageW - viewportW) * 2  *  (stageW - stageW * scale) / 2
-		//   = cameraX /  (stageW - viewportW)      *  (stageW - stageW * scale)
-		//   = cameraX /  (stageW - viewportW)      *  stageW * (1 - scale)
+		//---- 計算式メモ
+		// 可動領域を[0, 1]の範囲とし、カメラ座標をその範囲に変換する
+		//   range = (cameraX - stageX - viewportWidth / 2) / (stageWidth - viewportWidth)
+		// 
+		// カメラ座標をscaleに合わせて変換する
+		//   x = range * (stageWidth - stageWidth * scale) + (stageX - stageX * scale)
+		//   x = range * stageWidth * (1 - scale)          + stageX * (1 - scale)
+		// 
+		// 即ち…
+		//   x = (cameraX - stageX - viewportWidth / 2) / (stageWidth - viewportWidth) * stageWidth * (1 - scale) + stageX * (1 - scale)
+		// 
 		
-		//---- カメラに合わせて座標を調整する。
 		final Camera camera = Global.camera;
 		position.set(
-			camera.position.x / (stageSize.x - camera.viewportWidth)  * stageSize.x * (1.0f - scale),
-			camera.position.y / (stageSize.y - camera.viewportHeight) * stageSize.y * (1.0f - scale)
+			(camera.position.x - scrollArea.x - camera.viewportWidth  * 0.5f) / (scrollArea.width  - camera.viewportWidth ) * scrollArea.width  * (1.0f - scale) + scrollArea.x * (1.0f - scale),
+			(camera.position.y - scrollArea.y - camera.viewportHeight * 0.5f) / (scrollArea.height - camera.viewportHeight) * scrollArea.height * (1.0f - scale) + scrollArea.y * (1.0f - scale)
 		);
 	}
 
@@ -71,12 +84,11 @@ public class BackgroundLayer extends AbstractBackground
 		if(def.spriteDef == null)
 			return;
 		
-//		if(def.position == null)
-//			def.position = Vector2.Zero;
+		if(def.position == null)
+			def.position = Vector2.Zero;
 		
 		//---- 位置情報
-//		final PostureInterface posture = new BackgroundPosture(def.position.mul(scale), 0.0f);
-		final PostureInterface posture = new BackgroundPosture(Vector2.Zero, 0.0f);
+		final PostureInterface posture = new BackgroundPosture(def.position.tmp().mul(scale), 0.0f);
 		RenderObject renderObject = null;
 		
 		//---- 描画オブジェクト生成
@@ -106,6 +118,21 @@ public class BackgroundLayer extends AbstractBackground
 		backgrounds.add(renderObject);
 	}
 	
+	public void setScrollArea(Rectangle area)
+	{
+		setScrollArea(area.x, area.y, area.width, area.height);
+	}
+	
+	public void setScrollArea(float x, float y, float width, float height)
+	{
+		scrollArea.set(x, y, width, height);
+	}
+	
+	public Rectangle getScrollArea()
+	{
+		return scrollArea;
+	}
+	
 	@Override
 	public float getPositionX()
 	{
@@ -124,11 +151,20 @@ public class BackgroundLayer extends AbstractBackground
 		return 0.0f;
 	}
 	
+	/**
+	 * スクロールする範囲を合成する
+	 * @param area		合成する範囲
+	 */
+	void mergeScrollArea(Rectangle area)
+	{
+		scrollArea.merge(area);
+	}
+	
 	/** 座標 */
 	private final Vector2 position = new Vector2();
 	
-	/** ステージの大きさ */
-	private final Vector2 stageSize = new Vector2();
+	/** スクロールする範囲 */
+	private final Rectangle scrollArea = new Rectangle();
 	
 	/** 背景レイヤーの倍率 */
 	private final float scale;

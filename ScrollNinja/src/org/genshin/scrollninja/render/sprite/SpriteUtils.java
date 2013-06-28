@@ -27,6 +27,7 @@ public class SpriteUtils
 	{
 		//---- スプライト定義の補完
 		final Texture texture = TextureFactory.getInstance().get(def.textureFilePath);
+		final float worldScale = GlobalDefine.INSTANCE.WORLD_SCALE;
 		
 		// 値がnullだった場合の補完
 		if(def.uv == null)
@@ -52,17 +53,12 @@ public class SpriteUtils
 		
 		// スプライトのサイズが0の場合はUVマップのサイズに合わせる。
 		if(def.size.x == 0.0f)
-			def.size.x = def.uv.width;
+			def.size.x = def.uv.width * worldScale;
 		if(def.size.y == 0.0f)
-			def.size.y = def.uv.height;
+			def.size.y = def.uv.height * worldScale;
 		
 		// originは(0, 0)をスプライトの中心点とする。
 		def.origin.add(def.size.x * 0.5f, def.size.y * 0.5f);
-		
-		// 世界のスケールを押し付けておく。
-		def.position.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
-		def.size.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
-		def.origin.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
 		
 		//---- スプライトを生成する。
 		final Sprite sprite = new Sprite();

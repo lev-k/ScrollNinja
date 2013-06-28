@@ -1,7 +1,7 @@
 package org.genshin.scrollninja.stage;
 
 import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
-import org.genshin.scrollninja.object.background.BackgroundDef;
+import org.genshin.scrollninja.object.background.BackgroundLayerDef;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -25,21 +25,6 @@ class StageDef
 	
 	/** 地形の初期化用定義の配列 */
 	public TerrainDef[] terrains;
-}
-
-/**
- * 背景レイヤーの初期化用定義クラス
- */
-class BackgroundLayerDef
-{
-	/** レイヤーの名前 */
-	public String name;
-	
-	/** 背景レイヤーの倍率 */
-	public float scale = 1.0f;
-	
-	/** 背景オブジェクトの初期化用定義の配列 */
-	public BackgroundDef[] backgrounds;
 }
 
 /**

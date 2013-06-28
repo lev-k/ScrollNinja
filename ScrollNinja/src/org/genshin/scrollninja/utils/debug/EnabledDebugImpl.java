@@ -116,31 +116,14 @@ final class EnabledDebugImpl implements DebugImplInterface
 		//---- メッセージを出力する。
 		if(object != null)
 		{
+			final Class c = object.getClass();
+			
 			// クラス
 			consoleLogBuf.append("\n  class = ");
-			consoleLogBuf.append(object.getClass().getName());
+			consoleLogBuf.append(c.getName());
 			
 			// フィールド
-			for(Field field : object.getClass().getDeclaredFields())
-			{
-				consoleLogBuf.append("\n  ");
-				consoleLogBuf.append(field.getName());
-				consoleLogBuf.append(" = ");
-				
-				try
-				{
-					field.setAccessible(true);
-					consoleLogBuf.append(field.get(object).toString());
-				}
-				catch (IllegalArgumentException e)
-				{
-					e.printStackTrace();
-				}
-				catch (IllegalAccessException e)
-				{
-					e.printStackTrace();
-				}
-			}
+			appendFields(object, c);
 		}
 		else
 		{
@@ -152,6 +135,42 @@ final class EnabledDebugImpl implements DebugImplInterface
 		
 		//---- ログのバッファをクリアする。
 		consoleLogBuf.setLength(0);
+	}
+	
+	/**
+	 * フィールドをバッファに追加する
+	 * @param object		オブジェクト
+	 * @param c				クラス
+	 */
+	private void appendFields(Object object, Class c)
+	{
+		final Class sc = c.getSuperclass();
+		if(sc != null && sc != Object.class)
+		{
+			appendFields(object, sc);
+		}
+
+		for(Field field : c.getDeclaredFields())
+		{
+			consoleLogBuf.append("\n  ");
+			consoleLogBuf.append(field.getName());
+			consoleLogBuf.append(" = ");
+			
+			try
+			{
+				field.setAccessible(true);
+				final Object value = field.get(object);
+				consoleLogBuf.append(value == null ? "null" : value.toString());
+			}
+			catch (IllegalArgumentException e)
+			{
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
