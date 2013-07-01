@@ -4,6 +4,7 @@ import org.genshin.scrollninja.object.attack.AbstractAttack;
 import org.genshin.scrollninja.object.character.AbstractCharacter;
 import org.genshin.scrollninja.object.kaginawa.Kaginawa;
 import org.genshin.scrollninja.object.terrain.Terrain;
+import org.genshin.scrollninja.stage.Stage;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 
@@ -21,6 +22,16 @@ public abstract class AbstractCollisionCallback
 	 * @param contact				衝突情報
 	 */
 	public abstract void dispatch(AbstractCollisionCallback collisionCallback, Contact contact);
+	
+	/**
+	 * ステージオブジェクトと衝突した。（世界の果て）
+	 * @param obj		衝突したステージオブジェクト
+	 * @param contact	衝突情報
+	 */
+	public void collision(Stage obj, Contact contact)
+	{
+		/* 何もしない */
+	}
 	
 	/**
 	 * 地形オブジェクトと衝突した。

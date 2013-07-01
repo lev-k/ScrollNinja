@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.genshin.scrollninja.GlobalDefine;
+import org.genshin.scrollninja.collision.AbstractCollisionCallback;
 import org.genshin.scrollninja.collision.CollisionDef;
+import org.genshin.scrollninja.collision.CollisionObject;
 import org.genshin.scrollninja.collision.box2d.AbstractFixtureGenerator;
 import org.genshin.scrollninja.collision.box2d.BodyEditorFixtureGenerator;
+import org.genshin.scrollninja.collision.box2d.EdgeShapeGenerator;
+import org.genshin.scrollninja.collision.box2d.FixtureGenerator;
 import org.genshin.scrollninja.object.background.BackgroundGeneratorInterface;
 import org.genshin.scrollninja.object.background.BackgroundLayer;
 import org.genshin.scrollninja.object.background.BackgroundLayerDef;
@@ -22,6 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.World;
 
 
@@ -69,6 +74,9 @@ public class Stage implements StageInterface
 		{
 			layer.setScrollArea(area);
 		}
+		
+		//---- 世界の果てをつくろう
+		createEndOfWorld(world);
 		
 		//---- 敵オブジェクトを生成する。
 		for(EnemyDef def : stageDef.enemies)
@@ -205,7 +213,38 @@ public class Stage implements StageInterface
 		generator.generate(terrainLayer);
 	}
 	
-	
+	/**
+	 * 世界の果てをつくろう
+	 * @param world		世界オブジェクト
+	 */
+	private void createEndOfWorld(World world)
+	{
+		final CollisionDef def = JsonUtils.read("data/jsons/collision/eow.json", CollisionDef.class);
+		
+		final Vector2 directions[] = {
+			new Vector2(area.width, 0.0f),
+			new Vector2(0.0f, area.height),
+			new Vector2(area.width, 0.0f),
+			new Vector2(0.0f, area.height)
+		};
+		final Vector2 offsets[] = {
+			new Vector2(area.x, area.y),
+			new Vector2(area.x, area.y),
+			new Vector2(area.x, area.y + area.height),
+			new Vector2(area.x + area.width, area.y)
+		};
+		
+		for(int i = 0;  i < 4;  ++i)
+		{
+			final EdgeShapeGenerator shape = new EdgeShapeGenerator();
+			shape.direction = directions[i];
+			shape.offset = offsets[i];
+			((FixtureGenerator)def.fixtures[i]).shape = shape;
+		}
+		
+		new CollisionObject(def, world, new StageCollisionCallback());
+	}
+
 	/** ステージの大きさ */
 	private final Rectangle area;
 	
@@ -217,4 +256,15 @@ public class Stage implements StageInterface
 	
 	/** 背景レイヤーのマップ */
 	private final Map<String, BackgroundLayer> backgroundLayers = new HashMap<String, BackgroundLayer>();
+	
+	
+	/** 衝突判定のコールバック */
+	private class StageCollisionCallback extends AbstractCollisionCallback
+	{
+		@Override
+		public void dispatch(AbstractCollisionCallback collisionCallback, Contact contact)
+		{
+			collisionCallback.collision(Stage.this, contact);
+		}
+	}
 }

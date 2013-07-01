@@ -54,6 +54,8 @@ public class CollisionObject implements Disposable
 			final Fixture fixture = generator.generate(body);
 			if(fixture != null)
 			{
+				if(generator.name == null || generator.name.isEmpty())
+					generator.name = "Collision" + fixtures.size();
 				fixtures.put(generator.name, fixture);
 			}
 		}

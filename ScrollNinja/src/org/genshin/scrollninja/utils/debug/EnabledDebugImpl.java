@@ -116,7 +116,7 @@ final class EnabledDebugImpl implements DebugImplInterface
 		//---- メッセージを出力する。
 		if(object != null)
 		{
-			final Class c = object.getClass();
+			final Class<? extends Object> c = object.getClass();
 			
 			// クラス
 			consoleLogBuf.append("\n  class = ");
@@ -142,9 +142,9 @@ final class EnabledDebugImpl implements DebugImplInterface
 	 * @param object		オブジェクト
 	 * @param c				クラス
 	 */
-	private void appendFields(Object object, Class c)
+	private void appendFields(Object object, Class<? extends Object> c)
 	{
-		final Class sc = c.getSuperclass();
+		final Class<? extends Object> sc = c.getSuperclass();
 		if(sc != null && sc != Object.class)
 		{
 			appendFields(object, sc);

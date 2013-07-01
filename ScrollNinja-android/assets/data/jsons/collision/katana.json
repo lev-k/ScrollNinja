@@ -29,8 +29,14 @@
             },
             "shape": {
                 "@type": "Edge",
-                "length": -36,
-                "offset": 0
+                "direction": {
+                	"x": -36,
+                	"y": 0
+                },
+                "offset": {
+                	"x": 0,
+                	"y": 0
+                }
             }
         }
     ]

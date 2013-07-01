@@ -38,7 +38,7 @@
         },
         {
             "@type": "Default",
-            "name": "Hoge",
+            "name": "Rectangle",
             "fixtureDef": {
                 "density": 0,
                 "friction": 0.2,
@@ -93,13 +93,19 @@
             },
             "shape": {
                 "@type": "Edge",
-                "length": 0,
-                "offset": 0
+                "direction": {
+                	"x": 0,
+                	"y": 0
+                },
+                "offset": {
+                	"x": 0,
+                	"y": 0
+                }
             }
         },
         {
             "@type": "BodyEditor",
-            "name": "Rectangle",
+            "name": "Hoge",
             "fixtureDef": {
                 "density": 0,
                 "friction": 0.2,

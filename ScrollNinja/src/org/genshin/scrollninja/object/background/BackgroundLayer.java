@@ -151,15 +151,6 @@ public class BackgroundLayer extends AbstractBackground
 		return 0.0f;
 	}
 	
-	/**
-	 * スクロールする範囲を合成する
-	 * @param area		合成する範囲
-	 */
-	void mergeScrollArea(Rectangle area)
-	{
-		scrollArea.merge(area);
-	}
-	
 	/** 座標 */
 	private final Vector2 position = new Vector2();
 	
