@@ -14,6 +14,12 @@ import com.badlogic.gdx.math.Vector2;
 public interface StageInterface extends Disposable
 {
 	/**
+	 * ステージが夜か調べる
+	 * @return		夜ならtrue
+	 */
+	public boolean isNight();
+	
+	/**
 	 * ステージの範囲を取得する。
 	 * @return		ステージの範囲
 	 */

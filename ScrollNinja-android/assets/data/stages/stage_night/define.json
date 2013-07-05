@@ -1,0 +1,401 @@
+{
+	"isNight": true,
+    "startPosition": {
+        "x": 100,
+        "y": 500
+    },
+    "backgroundLayers": [
+        {
+            "scale": 0.6,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/far.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": 0
+					}
+				}
+            ]
+        },
+        {
+            "scale": 1,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/dust.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 65536,
+							"height": 800
+						},
+						"position": {
+							"x": 32768,
+							"y": 400
+						},
+						"size": {
+							"x": 65536,
+							"y": 800
+						},
+						"origin": {
+							"x": -32768,
+							"y": -400
+						}
+					},
+                    "animationSetDef": {
+						"uvSize": {
+							"x": 65536,
+							"y": 800
+						},
+						"animations": [
+							{
+								"@type": "UVScroll",
+								"name": "UVScroll",
+								"textureFilePath": "data/stages/stage_night/textures/dust.png",
+								"looping": true,
+								"startPosition": {
+									"x": 0,
+									"y": 0
+								},
+								"endPosition": {
+									"x": 0,
+									"y": 256
+								},
+								"totalTime": 15
+							}
+						]
+					},
+                    "animationName": "UVScroll",
+					"position": {
+						"x": 0,
+						"y": 0
+					},
+                    "color": {
+	                    "r": 0,
+	                    "g": 0,
+	                    "b": 0,
+	                    "a": 1
+                    }
+				}
+            ]
+        },
+        {
+            "name": "terrain",
+            "scale": 1,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/stage.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": 0
+					}
+				}
+            ]
+        },
+        {
+            "name": "player"
+        },
+        {
+            "scale": 1.1,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/hotaru.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": 0
+					}
+				}
+            ]
+        },
+        {
+            "scale": 1.5,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/leaf.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 65536,
+							"height": 800
+						},
+						"position": {
+							"x": 32768,
+							"y": 400
+						},
+						"size": {
+							"x": 65536,
+							"y": 800
+						},
+						"origin": {
+							"x": -32768,
+							"y": -400
+						}
+					},
+                    "animationSetDef": {
+						"uvSize": {
+							"x": 65536,
+							"y": 800
+						},
+						"animations": [
+							{
+								"@type": "UVScroll",
+								"name": "UVScroll",
+								"textureFilePath": "data/stages/stage_night/textures/leaf.png",
+								"looping": true,
+								"startPosition": {
+									"x": 0,
+									"y": 0
+								},
+								"endPosition": {
+									"x": 2048,
+									"y": -1024
+								},
+								"totalTime": 4
+							}
+						]
+					},
+                    "animationName": "UVScroll",
+					"position": {
+						"x": 0,
+						"y": 0
+					},
+                    "color": {
+	                    "r": 1,
+	                    "g": 1,
+	                    "b": 1,
+	                    "a": 0.2
+                    }
+				}
+            ]
+        },
+        {
+            "scale": 1.5,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/wood_01.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": -200
+					}
+				}
+            ]
+        },
+        {
+            "scale": 2.0,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/hotaru.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": -200
+					}
+				}
+            ]
+        },
+        {
+            "scale": 2.5,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/wood_02.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": -200
+					}
+				}
+            ]
+        },
+        {
+            "scale": 1,
+            "backgrounds": [
+                {
+                	"@type": "Default",
+                	"spriteDef": {
+						"textureFilePath": "data/stages/stage_night/textures/mist.png",
+						"uv": {
+							"x": 0,
+							"y": 0,
+							"width": 8192,
+							"height": 2048
+						},
+						"position": {
+							"x": 4096,
+							"y": 1024
+						},
+						"size": {
+							"x": 8192,
+							"y": 2048
+						},
+						"origin": {
+							"x": -4096,
+							"y": -1024
+						}
+					},
+					"position": {
+						"x": 0,
+						"y": 0
+					}
+				}
+            ]
+        }
+    ],
+    "enemies": [
+        {
+            "position": {
+                "x": 4000,
+                "y": 500
+            }
+        }
+    ],
+    "terrains": [
+        {
+            "layerName": "terrain",
+            "bodyDef": {
+                "type": "StaticBody"
+            },
+            "fixture": {
+                "@type": "BodyEditor",
+                "name": "terrain",
+                "fixtureDef": {
+                    "density": 1,
+                    "friction": 0.5
+                },
+                "filter": {
+                    "category": "Terrain",
+                    "ignoreCategories": []
+                },
+                "filePath": "",
+                "scale": 8192
+            }
+        }
+    ]
+
+}

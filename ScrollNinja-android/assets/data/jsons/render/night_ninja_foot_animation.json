@@ -1,0 +1,111 @@
+{
+    "uvSize": {
+        "x": 64,
+        "y": 64
+    },
+    "animations": [
+        {
+            "@type": "Texture",
+            "name": "Stay",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 3
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 6
+        },
+        {
+            "@type": "Texture",
+            "name": "Run",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "oneFrameCount": 6
+        },
+        {
+            "@type": "Texture",
+            "name": "Dash",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "oneFrameCount": 4
+        },
+        {
+            "@type": "Texture",
+            "name": "Jump",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 0
+            },
+            "frames": [
+                0
+            ],
+            "oneFrameCount": 6
+        },
+        {
+            "@type": "Texture",
+            "name": "KaginawaFront",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 0,
+                "y": 6
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 6
+        },
+        {
+            "@type": "Texture",
+            "name": "KaginawaBack",
+            "textureFilePath": "data/textures/ninja/night_ninja.png",
+            "looping": true,
+            "startIndex": {
+                "x": 4,
+                "y": 6
+            },
+            "frames": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "oneFrameCount": 6
+        }
+    ]
+}

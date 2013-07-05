@@ -2,7 +2,8 @@ package org.genshin.scrollninja.object.utils;
 
 import org.genshin.scrollninja.object.AbstractUpdatable;
 import org.genshin.scrollninja.object.character.AbstractCharacter;
-import org.genshin.scrollninja.stage.StageInterface;
+
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * キャラクターの復活管理
@@ -14,13 +15,13 @@ public class RespawnManager extends AbstractUpdatable
 {
 	/**
 	 * コンストラクタ
-	 * @param ninja		復活を管理するキャラクタオブジェクト
-	 * @param stage		現在のステージオブジェクト
+	 * @param ninja				復活を管理するキャラクタオブジェクト
+	 * @param positionGetter	復活する座標を取得するインタフェース
 	 */
-	public RespawnManager(AbstractCharacter character, StageInterface stage)
+	public RespawnManager(AbstractCharacter character, RespawnPositionGetterInterface positionGetter)
 	{
 		this.character = character;
-		this.stage = stage;
+		this.positionGetter = positionGetter;
 	}
 	
 	@Override
@@ -29,7 +30,7 @@ public class RespawnManager extends AbstractUpdatable
 		//---- 死んでたら復活しよう。
 		if(character.isDead())
 		{
-			character.spawn(stage.getStartPosition());
+			character.spawn(positionGetter.getPosition());
 		}
 	}
 
@@ -43,6 +44,13 @@ public class RespawnManager extends AbstractUpdatable
 	/** 復活を管理するキャラクタオブジェクト */
 	private final AbstractCharacter character;
 	
-	/** 現在のステージオブジェクト */
-	private final StageInterface stage;
+	/** 復活する座標を取得するインタフェース */
+	private final RespawnPositionGetterInterface positionGetter;
+	
+	
+	/** 復活する座標を取得するインタフェース */
+	public interface RespawnPositionGetterInterface
+	{
+		public Vector2 getPosition();
+	}
 }

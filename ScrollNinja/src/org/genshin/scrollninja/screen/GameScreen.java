@@ -6,9 +6,11 @@ import org.genshin.scrollninja.object.character.ninja.Ninja;
 import org.genshin.scrollninja.object.gui.Cursor;
 import org.genshin.scrollninja.object.utils.CameraTranslater;
 import org.genshin.scrollninja.object.utils.RespawnManager;
+import org.genshin.scrollninja.object.utils.RespawnManager.RespawnPositionGetterInterface;
 import org.genshin.scrollninja.stage.Stage;
 import org.genshin.scrollninja.stage.StageInterface;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -25,16 +27,18 @@ public class GameScreen extends AbstractScreen
 	public GameScreen()
 	{
 		final World world = getWorld();
+		final boolean isNight = true;
 		
 		//---- 衝突判定の監視
 		collisionDispatcher = new CollisionDispatcher(world);
 		
 		//---- ステージを生成する。
-		stage = new Stage(world, "data/stages/stage_test");
+//		stage = new Stage(world, "data/stages/stage_test");
+		stage = new Stage(world, "data/stages/stage_night");
 		
 		//---- 忍者を生成する。
-		final AbstractCharacter ninja = new Ninja(world, stage.getStartPosition(), getCursor());
-		new RespawnManager(ninja, stage);
+		final AbstractCharacter ninja = new Ninja(world, stage.getStartPosition(), getCursor(), stage.isNight());
+		new RespawnManager(ninja, new RespawnPositionGetter());
 		
 		//---- カメラの追従設定
 		final CameraTranslater cameraTranslater = new CameraTranslater();
@@ -68,4 +72,15 @@ public class GameScreen extends AbstractScreen
 	
 	/** 衝突判定の振り分けを管理するオブジェクト */
 	private final CollisionDispatcher collisionDispatcher;
+	
+	
+	/** 復活する座標を取得する */
+	private class RespawnPositionGetter implements RespawnPositionGetterInterface
+	{
+		@Override
+		public Vector2 getPosition()
+		{
+			return GameScreen.this.stage.getStartPosition();
+		}
+	}
 }

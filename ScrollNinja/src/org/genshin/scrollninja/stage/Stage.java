@@ -20,6 +20,7 @@ import org.genshin.scrollninja.object.character.AbstractCharacter;
 import org.genshin.scrollninja.object.character.enemy.TestEnemy;
 import org.genshin.scrollninja.object.terrain.Terrain;
 import org.genshin.scrollninja.object.utils.RespawnManager;
+import org.genshin.scrollninja.object.utils.RespawnManager.RespawnPositionGetterInterface;
 import org.genshin.scrollninja.utils.JsonUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -59,6 +60,7 @@ public class Stage implements StageInterface
 		}
 				
 		//---- フィールドに値を設定する。
+		isNight = stageDef.isNight;
 		area = new Rectangle(0.0f, 0.0f, 0.0f, 0.0f);
 		startPosition = stageDef.startPosition.mul(worldScale);
 		
@@ -81,10 +83,16 @@ public class Stage implements StageInterface
 		//---- 敵オブジェクトを生成する。
 		for(EnemyDef def : stageDef.enemies)
 		{
-			final AbstractCharacter character = new TestEnemy(world, def.position.mul(worldScale));
+			final AbstractCharacter character = new TestEnemy(world, def.position.mul(worldScale), isNight);
 			
 			// FIXME せっかくなのでrespawnさせてみる。最終的には消す。
-			new RespawnManager(character, this);
+			class RespawnPositionGetter implements RespawnPositionGetterInterface
+			{
+				public RespawnPositionGetter(Vector2 position) { this.position = position; }
+				@Override public Vector2 getPosition() { return position; }
+				private final Vector2 position;
+			}
+			new RespawnManager(character, new RespawnPositionGetter(def.position));
 		}
 	}
 
@@ -104,6 +112,12 @@ public class Stage implements StageInterface
 			backgroundLayer.dispose();
 		}
 		backgroundLayers.clear();
+	}
+	
+	@Override
+	public boolean isNight()
+	{
+		return isNight;
 	}
 
 	@Override
@@ -244,6 +258,9 @@ public class Stage implements StageInterface
 		
 		new CollisionObject(def, world, new StageCollisionCallback());
 	}
+	
+	/** 夜フラグ */
+	private boolean isNight;
 
 	/** ステージの大きさ */
 	private final Rectangle area;

@@ -1,4 +1,5 @@
 {
+	"isNight": false,
     "startPosition": {
         "x": 0,
         "y": -500
@@ -10,7 +11,7 @@
                 {
                 	"@type": "Default",
                 	"spriteDef": {
-						"textureFilePath": "data/textures/stage/test_far_03.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_far_03.png",
 						"uv": {
 							"x": 0,
 							"y": 798,
@@ -43,7 +44,7 @@
             	{
                 	"@type": "Default",
             		"spriteDef": {
-		        		"textureFilePath": "data/textures/stage/test_far_02.png",
+		        		"textureFilePath": "data/stages/stage_test/textures/test_far_02.png",
 						"uv": {
 							"x": 0,
 							"y": 381,
@@ -76,7 +77,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_far_01.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_far_01.png",
 						"uv": {
 							"x": 0,
 							"y": 290,
@@ -109,7 +110,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_near_01.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_near_01.png",
 						"uv": {
 							"x": 0,
 							"y": 1596,
@@ -149,7 +150,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_near_02.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_near_02.png",
 						"uv": {
 							"x": 0,
 							"y": 1544,
@@ -182,7 +183,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_light_01.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_light_01.png",
 						"uv": {
 							"x": 0,
 							"y": 0,
@@ -211,7 +212,7 @@
 							{
 								"@type": "UVScroll",
 								"name": "UVScroll",
-								"textureFilePath": "data/textures/stage/test_light_01.png",
+								"textureFilePath": "data/stages/stage_test/textures/test_light_01.png",
 								"looping": true,
 								"startPosition": {
 									"x": 4096,
@@ -245,7 +246,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_near_03.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_near_03.png",
 						"uv": {
 							"x": 0,
 							"y": 0,
@@ -278,7 +279,7 @@
                 {
                 	"@type": "Default",
                     "spriteDef": {
-						"textureFilePath": "data/textures/stage/test_light_02.png",
+						"textureFilePath": "data/stages/stage_test/textures/test_light_02.png",
 						"uv": {
 							"x": 0,
 							"y": 0,

@@ -14,6 +14,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
  */
 class StageDef
 {
+	/** 夜フラグ */
+	public boolean isNight;
+	
 	/** ステージ開始時のプレイヤーの初期座標 */
 	public Vector2 startPosition;
 	

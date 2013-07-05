@@ -14,9 +14,9 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 public class Ninja extends AbstractNinja
 {
-	public Ninja(World world, Vector2 position, Cursor cursor)
+	public Ninja(World world, Vector2 position, Cursor cursor, boolean isNight)
 	{
-		super(world, position);
+		super(world, position, isNight);
 		
 		//---- コントローラを設定する。
 		setController(new DefaultNinjaController(this, cursor));

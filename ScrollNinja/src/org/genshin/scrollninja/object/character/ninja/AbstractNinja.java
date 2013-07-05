@@ -40,8 +40,9 @@ public abstract class AbstractNinja extends AbstractCharacter
 	 * コンストラクタ
 	 * @param world			所属するWorldオブジェクト
 	 * @param position		初期座標
+	 * @param isNight		夜モードフラグ
 	 */
-	public AbstractNinja(World world, Vector2 position)
+	public AbstractNinja(World world, Vector2 position, boolean isNight)
 	{
 		super("data/jsons/collision/ninja.json", world);
 		
@@ -51,8 +52,11 @@ public abstract class AbstractNinja extends AbstractCharacter
 		setTransform(position, 0.0f);
 		
 		//---- 描画オブジェクトを生成する。
-		addRenderObject(new AnimationRenderObject("data/jsons/render/ninja_sprite.json", "data/jsons/render/ninja_foot_animation.json", this, GlobalDefine.RenderDepth.NINJA));
-		addRenderObject(new AnimationRenderObject("data/jsons/render/ninja_sprite.json", "data/jsons/render/ninja_body_animation.json", this, GlobalDefine.RenderDepth.NINJA));
+		final String spritePath = "data/jsons/render/ninja_sprite.json";
+		final String bodyAnimationPath = "data/jsons/render/" + (isNight ? "night_" : "") + "ninja_body_animation.json";
+		final String footAnimationPath = "data/jsons/render/" + (isNight ? "night_" : "") + "ninja_foot_animation.json";
+		addRenderObject(new AnimationRenderObject(spritePath, footAnimationPath, this, GlobalDefine.RenderDepth.NINJA));
+		addRenderObject(new AnimationRenderObject(spritePath, bodyAnimationPath, this, GlobalDefine.RenderDepth.NINJA));
 		
 		//---- フィールドを初期化する。
 		kaginawa = new Kaginawa(world, body);
@@ -69,9 +73,19 @@ public abstract class AbstractNinja extends AbstractCharacter
 		//---- 残像エフェクトの定義
 		if(afterimageEffectDef == null)
 		{
-			afterimageEffectDef = JsonUtils.read("data/jsons/effect/ninja_afterimage.json", EffectDef.class);
+			final String effectPath = "data/jsons/effect/" + (isNight ? "night_" : "") + "ninja_afterimage.json";
+			afterimageEffectDef = JsonUtils.read(effectPath, EffectDef.class);
 			afterimageEffectDef.startVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
 			afterimageEffectDef.endVelocity.mul(GlobalDefine.INSTANCE.WORLD_SCALE);
+		}
+		
+		//---- よるカラー
+		if(isNight)
+		{
+			for(RenderObject ro : getRenderObjects())
+			{
+				ro.setColor(0.1f, 0.1f, 0.5f, 1.0f);
+			}
 		}
 	}
 	
