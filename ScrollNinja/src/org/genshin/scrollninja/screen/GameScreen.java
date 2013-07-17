@@ -33,8 +33,8 @@ public class GameScreen extends AbstractScreen
 		collisionDispatcher = new CollisionDispatcher(world);
 		
 		//---- ステージを生成する。
-//		stage = new Stage(world, "data/stages/stage_test");
-		stage = new Stage(world, "data/stages/stage_night");
+		stage = new Stage(world, "data/stages/stage_test");
+//		stage = new Stage(world, "data/stages/stage_night");
 		
 		//---- 忍者を生成する。
 		final AbstractCharacter ninja = new Ninja(world, stage.getStartPosition(), getCursor(), stage.isNight());
